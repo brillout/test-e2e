@@ -38,7 +38,7 @@ function tolerateErrorBuiltIn({ logSource, logText }: LogData): boolean {
         logSource: 'stderr',
       },
 
-      /* Ignore Chrome logging warning when it cannot do its creepy tracking: https://stackoverflow.com/questions/69619035/error-with-permissions-policy-header-unrecognized-feature-interest-cohort/75119417#75119417
+      /* Ignore Chrome logging warning when it cannot do its creepy tracking: https://stackoverflow.com/questions/69619035/error-with-permissions-policy-header-unrecognized-feature-interest-cohort
       ```
       [15:57:20.273][/test/abort/test-dev-server.test.ts][npm run dev:server][Browser Warning] {
         "type": "warning",

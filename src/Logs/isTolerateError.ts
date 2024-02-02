@@ -20,7 +20,7 @@ function isTolerateError({ logSource, logText }: LogData): boolean {
 }
 
 function tolerateError({ logSource, logText }: LogData): boolean {
-  return isFetchExperimentalWarning() || isTerminationEPIPE()
+  return isFetchExperimentalWarning() || isTerminationEPIPE() || isChromeCannotCreepyTrackWarning()
 
   function isFetchExperimentalWarning() {
     return (
@@ -40,5 +40,28 @@ function tolerateError({ logSource, logText }: LogData): boolean {
   */
   function isTerminationEPIPE() {
     return logSource === 'stderr' && logText.includes('The service was stopped: write EPIPE')
+  }
+
+  /* Ignore Chrome logging warning when it cannot do its creepy tracking: https://stackoverflow.com/questions/69619035/error-with-permissions-policy-header-unrecognized-feature-interest-cohort/75119417#75119417
+     ```
+     [15:57:20.273][/test/abort/test-dev-server.test.ts][npm run dev:server][Browser Warning] {
+       "type": "warning",
+       "text": "Error with Permissions-Policy header: Origin trial controlled feature not enabled: 'interest-cohort'.",
+       "location": {
+         "url": "",
+         "lineNumber": 0,
+         "columnNumber": 0
+       },
+       "args": []
+     }
+     ```
+  */
+  function isChromeCannotCreepyTrackWarning() {
+    return (
+      logSource === 'Browser Warning' &&
+      logText.includes(
+        "Error with Permissions-Policy header: Origin trial controlled feature not enabled: 'interest-cohort'."
+      )
+    )
   }
 }

@@ -7,10 +7,8 @@ const verbose = check('--verbose')
 const inspect = check('--inspect')
 const debugEsbuild = check('--debug-esbuild')
 const bail = check('--bail')
-/* Defined in ./findFiles.ts
- * I don't think we use the --exclude option anymore? Can we remove it?
+// Defined & used in ./findFiles.ts
 const exclude = check('--exclude')
-*/
 validate()
 
 const cliOptions = {

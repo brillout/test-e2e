@@ -32,7 +32,7 @@ function run(
     doNotFailOnWarning?: boolean
     serverUrl?: string
     isFlaky?: boolean
-  } = {}
+  } = {},
 ) {
   assert(cwd === undefined)
 
@@ -122,7 +122,7 @@ function run(
           args: msg.args(),
         },
         null,
-        2
+        2,
       ),
     })
   }
@@ -136,7 +136,7 @@ function run(
           location: err.stack,
         },
         null,
-        2
+        2,
       ),
     })
   }

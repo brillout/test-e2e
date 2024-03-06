@@ -10,7 +10,7 @@ function runCommandShortLived(
     swallowError = false,
     timeout = 5000,
     cwd = process.cwd(),
-  }: { swallowError?: boolean; timeout?: number; cwd?: string } = {}
+  }: { swallowError?: boolean; timeout?: number; cwd?: string } = {},
 ): Promise<string> {
   const { promise, resolve, reject } = genPromise<string>()
 

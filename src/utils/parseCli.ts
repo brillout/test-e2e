@@ -23,7 +23,7 @@ function validate() {
         // prettier-ignore
         `unknown options: ${optionList.join(' ')}`,
         `known options: ${optionsKnown.join(' ')}`,
-      ].join('\n')
+      ].join('\n'),
     )
   }
 }

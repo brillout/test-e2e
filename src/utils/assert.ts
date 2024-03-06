@@ -38,7 +38,7 @@ function assert(condition: unknown, debugInfo?: unknown): asserts condition {
       'A maintainer will fix the bug (usually under 24 hours).',
       `Do not hesitate to reach out as it makes ${projectInfo.projectName} more robust.`,
       debugStr,
-    ].join(' ')
+    ].join(' '),
   )
 
   logFail('a bug occurred in @brillout/test-e2e', true)

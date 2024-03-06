@@ -24,8 +24,8 @@ async function testScreenshotFixture({
   if (doNotTestLocally && !isCI()) {
     console.log(
       `\n${pc.blue(
-        'INFO'
-      )} screenshot test skipped (because running test locally, i.e. not in a CI environment): ${pngFixturPath}`
+        'INFO',
+      )} screenshot test skipped (because running test locally, i.e. not in a CI environment): ${pngFixturPath}`,
     )
     return
   }
@@ -34,7 +34,7 @@ async function testScreenshotFixture({
     const fileContent = PNG.sync.write(pngActual)
     fs.writeFileSync(pngFixturPath, fileContent)
     throw new Error(
-      `Screenshot fixture missing. Screenshot fixture created at ${pngFixturPath}. You can now re-run the test and the screenshot fixture test will pass.`
+      `Screenshot fixture missing. Screenshot fixture created at ${pngFixturPath}. You can now re-run the test and the screenshot fixture test will pass.`,
     )
   }
   const pngExpect = PNG.sync.read(fs.readFileSync(pngFixturPath))

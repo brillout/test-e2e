@@ -5,7 +5,7 @@ import { sleep } from './utils'
 
 async function autoRetry(
   test: () => void | Promise<void>,
-  { timeout = TIMEOUT_AUTORETRY }: { timeout?: number } = {}
+  { timeout = TIMEOUT_AUTORETRY }: { timeout?: number } = {},
 ): Promise<void> {
   const period = 100
   const numberOfTries = timeout / period

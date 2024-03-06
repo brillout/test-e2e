@@ -16,17 +16,18 @@ const cwd = process.cwd()
 let gitFiles: string[]
 
 async function findFiles(pattern: string): Promise<string[]> {
-  let files = (await glob([pattern], { ignore: ['**/node_modules/**', '**/.git/**'], cwd, dot: true }))
-    .map((filePathRelative) => path.join(cwd, filePathRelative))
+  let files = (await glob([pattern], { ignore: ['**/node_modules/**', '**/.git/**'], cwd, dot: true })).map(
+    (filePathRelative) => path.join(cwd, filePathRelative),
+  )
   files = await filterGitIgnoredFiles(files)
   return files
 }
 
 function filterFiles(files: string[], findFilter: null | FindFilter): string[] {
   return files
-    .map(p => path.relative(cwd, p))
+    .map((p) => path.relative(cwd, p))
     .filter((filePathRelative) => applyFilter(filePathRelative, findFilter))
-    .map(p => path.join(cwd, p))
+    .map((p) => path.join(cwd, p))
 }
 
 async function filterGitIgnoredFiles(files: string[]): Promise<string[]> {
@@ -37,7 +38,7 @@ async function filterGitIgnoredFiles(files: string[]): Promise<string[]> {
     //  - `git ls-files --others --exclude-standard` from https://stackoverflow.com/questions/3801321/git-list-only-untracked-files-also-custom-commands/3801554#3801554
     const stdout2 = await runCommandShortLived('git ls-files --others --exclude-standard', { cwd })
     gitFiles = [...stdout1.split('\n'), ...stdout2.split('\n')].map((filePathRelative) =>
-      path.join(cwd, filePathRelative)
+      path.join(cwd, filePathRelative),
     )
   }
   const filesFiltered = files.filter((file) => gitFiles.includes(file))

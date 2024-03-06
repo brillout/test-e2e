@@ -38,9 +38,9 @@ async function runAll(filter: null | FindFilter) {
           [
             `Following test files failed, see logs above for more information (search for [${TEST_FAIL}]):`,
             ...failedTestFiles.map((testFile) => `❌ ${testFile}`),
-          ].join('\n')
-        )
-      )
+          ].join('\n'),
+        ),
+      ),
     )
   }
 }
@@ -217,7 +217,7 @@ async function runTests(testInfo: TestInfo, isFinalAttempt: boolean): Promise<bo
           logFailure(
             null,
             `${getErrorType(failOnWarning)} occurred while running the test "${testDesc}"`,
-            isFinalAttempt
+            isFinalAttempt,
           )
         } else {
           assert(false)

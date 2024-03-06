@@ -1,5 +1,6 @@
 export { findFiles }
 export { findFilesParseCliArgs }
+export { filterFiles }
 export type { FindFilter }
 
 import glob from 'fast-glob'
@@ -14,12 +15,18 @@ type FindFilter = {
 const cwd = process.cwd()
 let gitFiles: string[]
 
-async function findFiles(pattern: string, findFilter: null | FindFilter) {
+async function findFiles(pattern: string): Promise<string[]> {
   let files = (await glob([pattern], { ignore: ['**/node_modules/**', '**/.git/**'], cwd, dot: true }))
-    .filter((filePathRelative) => applyFilter(filePathRelative, findFilter))
     .map((filePathRelative) => path.join(cwd, filePathRelative))
   files = await filterGitIgnoredFiles(files)
   return files
+}
+
+function filterFiles(files: string[], findFilter: null | FindFilter): string[] {
+  return files
+    .map(p => path.relative(cwd, p))
+    .filter((filePathRelative) => applyFilter(filePathRelative, findFilter))
+    .map(p => path.join(cwd, p))
 }
 
 async function filterGitIgnoredFiles(files: string[]): Promise<string[]> {

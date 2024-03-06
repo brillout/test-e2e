@@ -1,18 +1,24 @@
 export { findTestFiles }
 
-import { findFiles, FindFilter } from './utils'
+import { filterFiles, findFiles, FindFilter } from './utils'
 import { getTestFilesForCurrentJob } from './parallel-ci'
 
 // Unit tests `**/*.spec.*` are handled by Vitest
 const testFilenamePattern = '**/*.test.ts'
 
 async function findTestFiles(findFilter: null | FindFilter): Promise<string[]> {
+  const testFilesAll = await findTestFilesAll()
+  const testFiles = filterFiles(testFilesAll, findFilter)
+  return testFiles
+}
+
+async function findTestFilesAll(): Promise<string[]> {
   {
     const testFiles = getTestFilesForCurrentJob()
     if (testFiles) return testFiles
   }
   {
-    const testFiles = findFiles(testFilenamePattern, findFilter)
+    const testFiles = findFiles(testFilenamePattern)
     return testFiles
   }
 }

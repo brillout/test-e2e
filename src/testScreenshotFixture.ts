@@ -23,19 +23,39 @@ async function testScreenshotFixture({
   const pngFixturPath = screenshotFixturePath || pngPaths.pngFixturPath
   if (doNotTestLocally && !isCI()) {
     console.log(
-      `\n${pc.blue(
-        'INFO',
-      )} screenshot test skipped (because running test locally, i.e. not in a CI environment): ${pngFixturPath}`,
+      `\n${pc.blue('INFO')} test screenshot fixture ${pngFixturPath} ${pc.bold('skipped')}. (Because ${pc.cyan(
+        'doNotTestLocally: true',
+      )} and test is being run locally, i.e. not in a CI environment.)`,
     )
     return
   }
-  if (!fs.existsSync(pngFixturPath)) {
+  const fixtureMissing = !fs.existsSync(pngFixturPath)
+  if (fixtureMissing) {
     const pngActual = await takeScreenshot()
     const fileContent = PNG.sync.write(pngActual)
-    fs.writeFileSync(pngFixturPath, fileContent)
-    throw new Error(
-      `Screenshot fixture missing. Screenshot fixture created at ${pngFixturPath}. You can now re-run the test and the screenshot fixture test will pass.`,
-    )
+    const { pngExpectPath } = pngPaths
+    const filPath = isCI() ? pngExpectPath : pngFixturPath
+    fs.writeFileSync(filPath, fileContent)
+    console.log('Expect image written at', pngExpectPath)
+    const errMsgs = [
+      //
+      'Screenshot fixture missing. Screenshot fixture created at:',
+      `  ${filPath}`,
+    ]
+    if (!isCI()) {
+      errMsgs.push('You can now re-run the test and the screenshot fixture test will pass.')
+    } else {
+      errMsgs.push(
+        [
+          'The screnshot fixture was uploaded as GitHub Workflow Artifact.',
+          `(See ${pc.bold('Summary')} > ${pc.bold('Artifacts')}, and make sure to use the ${pc.bold(
+            'actions/upload-artifact@v3',
+          )} action.)`,
+          `Download the fixture, check it into the repository (so that it lives at ${pngFixturPath}), and try again: the test should now pass.`,
+        ].join(' '),
+      )
+    }
+    throw new Error(errMsgs.join('\n'))
   }
   const pngExpect = PNG.sync.read(fs.readFileSync(pngFixturPath))
   const pngActual = await takeScreenshot()
@@ -49,16 +69,16 @@ async function testScreenshotFixture({
   } catch (err) {
     const { pngExpectPath, pngActualPath, pngDifferPath } = pngPaths
     {
-      console.log('Actual image written at', pngActualPath)
       fs.writeFileSync(pngActualPath, PNG.sync.write(pngActual))
+      console.log('Actual image written at', pngActualPath)
     }
     {
-      console.log('Expect image written at', pngExpectPath)
       fs.writeFileSync(pngExpectPath, PNG.sync.write(pngExpect))
+      console.log('Expect image written at', pngExpectPath)
     }
     {
-      console.log('Differ image written at', pngDifferPath)
       fs.writeFileSync(pngDifferPath, PNG.sync.write(pngDiffer))
+      console.log('Differ image written at', pngDifferPath)
     }
     throw err
   }

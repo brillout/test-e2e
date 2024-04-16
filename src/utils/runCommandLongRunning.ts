@@ -70,7 +70,7 @@ function runCommandLongRunning({
       command = command + '.cmd'
     }
   }
-  const proc = spawn(command, args, { cwd, detached, ...nodeWorkaround })
+  const proc = spawn(command, args, { cwd, detached, ...nodeWorkaround() })
 
   let procExited = false
 
@@ -274,15 +274,11 @@ function isSuccessCode(code: number | null): boolean {
   return code === 0 || code === null || (code === 1 && isWindows())
 }
 
-/* Doesn't work:
-const spawn2: typeof spawn_ = (...args) => spawn_(...args)
-const spawn3: typeof spawn_ = function(...args) { return spawn_(...args) }
-//*/
+// Workaround for Node.js regression:
+//  - https://github.com/nodejs/node/issues/52475
+//  - https://github.com/prebuild/prebuildify/issues/83#issuecomment-2056607495
 function nodeWorkaround() {
   if (isWindows()) {
-    // Workaround for Node.js regression:
-    //  - https://github.com/nodejs/node/issues/52475
-    //  - https://github.com/prebuild/prebuildify/issues/83#issuecomment-2056607495
     return { shell: true }
   } else {
     return {}

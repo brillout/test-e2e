@@ -6,6 +6,8 @@ import fs from 'fs'
 import path from 'path'
 import { assert } from './utils.js'
 import { getCurrentTest } from './getCurrentTest.js'
+import { createRequire } from 'module'
+const require_ = createRequire(import.meta.url)
 
 const filesContentOriginal: Record<string, string> = {}
 
@@ -43,6 +45,6 @@ function editFileAssertReverted() {
 function getFilePath(filePathRelative: string) {
   const { testFile } = getCurrentTest()
   const cwd = path.dirname(testFile)
-  const filePath = require.resolve(filePathRelative, { paths: [cwd] })
+  const filePath = require_.resolve(filePathRelative, { paths: [cwd] })
   return filePath
 }

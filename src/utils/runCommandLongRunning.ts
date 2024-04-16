@@ -1,8 +1,8 @@
 export { runCommandLongRunning }
 
-import { spawn as spawn_ } from 'child_process'
+import { spawn } from 'child_process'
 import stripAnsi from 'strip-ansi'
-import { assert, runCommandShortLived, humanizeTime, isWindows, isLinux, isCallable, hasProp } from '../utils.js'
+import { assert, runCommandShortLived, humanizeTime, isWindows, isLinux, isCallable } from '../utils.js'
 import type { ChildProcessWithoutNullStreams } from 'child_process'
 
 function runCommandLongRunning({
@@ -70,7 +70,7 @@ function runCommandLongRunning({
       command = command + '.cmd'
     }
   }
-  const proc = spawn(command, args, { cwd, detached })
+  const proc = spawn(command, args, { cwd, detached, ...nodeWorkaround })
 
   let procExited = false
 
@@ -237,6 +237,7 @@ function stopProcess({
         // Ignoring stderr doesn't solve the problem that taskkill makes the process exit with code 1
         'inherit', // stderr
       ],
+      ...nodeWorkaround(),
     })
   } else {
     assert(typeof pid === 'number')
@@ -277,18 +278,13 @@ function isSuccessCode(code: number | null): boolean {
 const spawn2: typeof spawn_ = (...args) => spawn_(...args)
 const spawn3: typeof spawn_ = function(...args) { return spawn_(...args) }
 //*/
-function spawn(
-  command: Parameters<typeof spawn_>[0],
-  args: Parameters<typeof spawn_>[1],
-  options: Parameters<typeof spawn_>[2],
-): ChildProcessWithoutNullStreams {
-  // Workaround for Node.js regression:
-  //  - https://github.com/nodejs/node/issues/52475
-  //  - https://github.com/prebuild/prebuildify/issues/83#issuecomment-2056607495
-  if (isWindows()) options.shell = true
-
-  // Needed for spawn_() to return ChildProcessWithoutNullStreams instead of ChildProcess
-  assert(hasProp(options, 'stdio', 'undefined'))
-
-  return spawn_(command, args, options)
+function nodeWorkaround() {
+  if (isWindows()) {
+    // Workaround for Node.js regression:
+    //  - https://github.com/nodejs/node/issues/52475
+    //  - https://github.com/prebuild/prebuildify/issues/83#issuecomment-2056607495
+    return { shell: true }
+  } else {
+    return {}
+  }
 }

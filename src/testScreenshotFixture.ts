@@ -6,9 +6,9 @@ import pixelmatch from 'pixelmatch'
 import { PNG, type PNGWithMetadata } from 'pngjs'
 import fs from 'fs'
 import path from 'path'
-import { assert, isCI, sleep } from './utils'
-import { getCurrentTest, getCwd } from './getCurrentTest'
-import { expect } from './chai/expect'
+import { assert, isCI, sleep } from './utils.js'
+import { getCurrentTest, getCwd } from './getCurrentTest.js'
+import { expect } from './chai/expect.js'
 import pc from '@brillout/picocolors'
 
 async function testScreenshotFixture({

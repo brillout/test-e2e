@@ -1,7 +1,7 @@
 export { test }
 
-import { assert } from './utils'
-import { getCurrentTest } from './getCurrentTest'
+import { assert } from './utils.js'
+import { getCurrentTest } from './getCurrentTest.js'
 
 function test(testDesc: string, testFn: () => void | Promise<void>) {
   const testInfo = getCurrentTest()

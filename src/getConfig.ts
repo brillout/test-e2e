@@ -3,7 +3,7 @@ export { loadConfig }
 
 import path from 'path'
 import fs from 'fs'
-import { assert, assertUsage, fsWindowsBugWorkaround, isCallable, isObject } from './utils'
+import { assert, assertUsage, fsWindowsBugWorkaround, isCallable, isObject } from './utils.js'
 
 const configFileName = 'test-e2e.config.mjs'
 

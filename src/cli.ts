@@ -3,10 +3,10 @@ import './utils/trackLogs'
 //*/
 
 import sourceMapSupport from 'source-map-support'
-import { assert, findFilesParseCliArgs, fsWindowsBugWorkaroundPrefix } from './utils'
-import { runAll } from './runAll'
-import { sourceMaps } from './buildTs'
-import { Logs } from './Logs'
+import { assert, findFilesParseCliArgs, fsWindowsBugWorkaroundPrefix } from './utils.js'
+import { runAll } from './runAll.js'
+import { sourceMaps } from './buildTs.js'
+import { Logs } from './Logs.js'
 
 initSourceMap()
 initPromiseRejectionHandler()

@@ -1,7 +1,7 @@
 export { findTestFiles }
 
-import { filterFiles, findFiles, FindFilter } from './utils'
-import { getTestFilesForCurrentJob } from './parallel-ci'
+import { filterFiles, findFiles, FindFilter } from './utils.js'
+import { getTestFilesForCurrentJob } from './parallel-ci.js'
 
 // Unit tests `**/*.spec.*` are handled by Vitest
 const testFilenamePattern = '**/*.test.ts'

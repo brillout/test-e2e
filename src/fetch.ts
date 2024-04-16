@@ -1,9 +1,9 @@
 export { fetch }
 export { fetchHtml }
 
-import { getServerUrl } from './getCurrentTest'
+import { getServerUrl } from './getCurrentTest.js'
 import fetch_ from 'node-fetch'
-import { Logs } from './Logs'
+import { Logs } from './Logs.js'
 
 async function fetchHtml(pathname: string) {
   const response = await fetch(getServerUrl() + pathname)

@@ -1,8 +1,8 @@
 export { runCommandShortLived }
 
 import { exec } from 'child_process'
-import { genPromise } from './genPromise'
-import { humanizeTime } from './humanizeTime'
+import { genPromise } from './genPromise.js'
+import { humanizeTime } from './humanizeTime.js'
 
 function runCommandShortLived(
   cmd: string,

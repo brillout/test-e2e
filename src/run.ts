@@ -1,13 +1,13 @@
 export { run }
 
 import type { ConsoleMessage } from 'playwright-chromium'
-import { sleep, logProgress, cliOptions, isLinux, runCommandLongRunning } from './utils'
-import { assert } from './utils'
-import { Logs } from './Logs'
-import { editFileAssertReverted, editFileRevert } from './editFile'
-import { getCurrentTest, getCwd, getServerUrl, setRunInfo } from './getCurrentTest'
-import { page } from './page'
-import { TIMEOUT_NPM_SCRIPT, TIMEOUT_PLAYWRIGHT, TIMEOUT_PROCESS_TERMINATION } from './TIMEOUTS'
+import { sleep, logProgress, cliOptions, isLinux, runCommandLongRunning } from './utils.js'
+import { assert } from './utils.js'
+import { Logs } from './Logs.js'
+import { editFileAssertReverted, editFileRevert } from './editFile.js'
+import { getCurrentTest, getCwd, getServerUrl, setRunInfo } from './getCurrentTest.js'
+import { page } from './page.js'
+import { TIMEOUT_NPM_SCRIPT, TIMEOUT_PLAYWRIGHT, TIMEOUT_PROCESS_TERMINATION } from './TIMEOUTS.js'
 
 function run(
   cmd: string,

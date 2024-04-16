@@ -1,6 +1,6 @@
 export { page }
 
-import { getCurrentTest } from './getCurrentTest'
+import { getCurrentTest } from './getCurrentTest.js'
 import type { Page } from 'playwright-chromium'
 
 const page = new Proxy({} as Page, {

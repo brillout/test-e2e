@@ -1,7 +1,7 @@
 export { isParallelCI }
 export { getTestFilesForCurrentJob }
 
-import { assert } from './utils'
+import { assert } from './utils.js'
 import fs from 'fs'
 import path from 'path'
 

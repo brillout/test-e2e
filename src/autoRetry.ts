@@ -1,7 +1,7 @@
 export { autoRetry }
 
-import { TIMEOUT_AUTORETRY } from './TIMEOUTS'
-import { sleep } from './utils'
+import { TIMEOUT_AUTORETRY } from './TIMEOUTS.js'
+import { sleep } from './utils.js'
 
 async function autoRetry(
   test: () => void | Promise<void>,

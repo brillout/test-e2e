@@ -1,6 +1,6 @@
 export { cliOptions }
 
-import { check, prepare, validate } from './parseCli'
+import { check, prepare, validate } from './parseCli.js'
 
 prepare()
 const verbose = check('--verbose')

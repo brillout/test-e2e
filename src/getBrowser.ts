@@ -1,8 +1,8 @@
 export { getBrowser }
 
 import { Browser, chromium } from 'playwright-chromium'
-import { Logs } from './Logs'
-import { assert, logProgress } from './utils'
+import { Logs } from './Logs.js'
+import { assert, logProgress } from './utils.js'
 
 let browser: Browser | undefined
 async function getBrowser() {

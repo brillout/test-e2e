@@ -3,7 +3,7 @@ export { sourceMaps }
 
 import esbuild from 'esbuild'
 import fs from 'fs'
-import { cliOptions } from './utils'
+import { cliOptions } from './utils.js'
 
 const sourceMaps: Record<string, string> = {}
 

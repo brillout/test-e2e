@@ -1,7 +1,7 @@
 export { isTolerateError }
 
-import { getConfig } from '../getConfig'
-import type { LogSource } from '../Logs'
+import { getConfig } from '../getConfig.js'
+import type { LogSource } from '../Logs.js'
 import stripAnsi from 'strip-ansi'
 
 type LogData = { logSource: LogSource; logText: string }

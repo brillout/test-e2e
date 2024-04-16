@@ -5,12 +5,12 @@ export { assertInfo }
 export { getProjectError }
 export { errorPrefix as projectErrorPrefix }
 
-import { projectInfo } from './projectInfo'
-import { Logs } from '../Logs'
-import { getCurrentTest } from '../getCurrentTest'
-import { logSection } from '../logSection'
-import { logError } from '../logError'
-import { logFail } from '../logTestStatus'
+import { projectInfo } from './projectInfo.js'
+import { Logs } from '../Logs.js'
+import { getCurrentTest } from '../getCurrentTest.js'
+import { logSection } from '../logSection.js'
+import { logError } from '../logError.js'
+import { logFail } from '../logTestStatus.js'
 
 const errorPrefix = `[${projectInfo.npmPackageName}]`
 const internalErrorPrefix = `${errorPrefix}[Bug]`

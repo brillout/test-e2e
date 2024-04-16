@@ -1,7 +1,7 @@
 export { logProgress }
 export { ensureNewTerminalLine }
 
-import { isTTY } from './isTTY'
+import { isTTY } from './isTTY.js'
 
 const iconSuccess = '🟢'
 const iconPending = '🟠'

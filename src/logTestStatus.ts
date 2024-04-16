@@ -5,8 +5,8 @@ export { logBoot }
 export { hasFail }
 export const TEST_FAIL = 'TEST_FAIL'
 
-import { getCurrentTest } from './getCurrentTest'
-import { assert, isTTY } from './utils'
+import { getCurrentTest } from './getCurrentTest.js'
+import { assert, isTTY } from './utils.js'
 import pc from '@brillout/picocolors'
 
 function logPass() {

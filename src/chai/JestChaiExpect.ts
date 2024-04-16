@@ -1,4 +1,4 @@
-import type { ChaiPlugin } from './types'
+import type { ChaiPlugin } from './types.js'
 
 // Copied from https://github.com/vitest-dev/vitest/blob/f3524602ccc678badaae6bc5c3945008d8cfd82a/packages/vitest/src/integrations/chai/jest-expect.ts
 

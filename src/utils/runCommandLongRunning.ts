@@ -2,7 +2,7 @@ export { runCommandLongRunning }
 
 import { spawn } from 'child_process'
 import stripAnsi from 'strip-ansi'
-import { assert, runCommandShortLived, humanizeTime, isWindows, isLinux, isCallable } from '../utils'
+import { assert, runCommandShortLived, humanizeTime, isWindows, isLinux, isCallable } from '../utils.js'
 import type { ChildProcessWithoutNullStreams } from 'child_process'
 
 function runCommandLongRunning({

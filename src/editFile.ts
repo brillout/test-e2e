@@ -4,8 +4,8 @@ export { editFileAssertReverted }
 
 import fs from 'fs'
 import path from 'path'
-import { assert } from './utils'
-import { getCurrentTest } from './getCurrentTest'
+import { assert } from './utils.js'
+import { getCurrentTest } from './getCurrentTest.js'
 
 const filesContentOriginal: Record<string, string> = {}
 

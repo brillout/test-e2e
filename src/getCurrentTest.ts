@@ -11,9 +11,9 @@ export { getServerUrl }
 export type { TestInfo }
 
 import type { Page } from 'playwright-chromium'
-import { assert } from './utils'
+import { assert } from './utils.js'
 import path from 'path'
-import { TIMEOUT_TEST_FUNCTION } from './TIMEOUTS'
+import { TIMEOUT_TEST_FUNCTION } from './TIMEOUTS.js'
 
 type TestInfo = {
   testFile: string

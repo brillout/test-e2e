@@ -9,11 +9,11 @@ export const Logs = {
 }
 export type { LogSource }
 
-import { assert, ensureNewTerminalLine, isWindows } from './utils'
+import { assert, ensureNewTerminalLine, isWindows } from './utils.js'
 import pc from '@brillout/picocolors'
-import { getCurrentTestOptional } from './getCurrentTest'
-import { logSection } from './logSection'
-import { isTolerateError } from './Logs/isTolerateError'
+import { getCurrentTestOptional } from './getCurrentTest.js'
+import { logSection } from './logSection.js'
+import { isTolerateError } from './Logs/isTolerateError.js'
 import stripAnsi from 'strip-ansi'
 
 type LogSource =

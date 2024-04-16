@@ -1,17 +1,17 @@
 export { runAll }
 
 import type { Browser } from 'playwright-chromium'
-import { getCurrentTest, type TestInfo } from './getCurrentTest'
-import { Logs } from './Logs'
-import { assert, assertUsage, cliOptions, humanizeTime, isCI, isWindows, logProgress } from './utils'
-import { type FindFilter, fsWindowsBugWorkaround } from './utils'
-import { setCurrentTest } from './getCurrentTest'
-import { getBrowser } from './getBrowser'
-import { buildTs } from './buildTs'
-import { findTestFiles } from './findTestFiles'
-import { loadConfig } from './getConfig'
-import { logError } from './logError'
-import { hasFail, logBoot, logFail, logPass, logWarn, TEST_FAIL } from './logTestStatus'
+import { getCurrentTest, type TestInfo } from './getCurrentTest.js'
+import { Logs } from './Logs.js'
+import { assert, assertUsage, cliOptions, humanizeTime, isCI, isWindows, logProgress } from './utils.js'
+import { type FindFilter, fsWindowsBugWorkaround } from './utils.js'
+import { setCurrentTest } from './getCurrentTest.js'
+import { getBrowser } from './getBrowser.js'
+import { buildTs } from './buildTs.js'
+import { findTestFiles } from './findTestFiles.js'
+import { loadConfig } from './getConfig.js'
+import { logError } from './logError.js'
+import { hasFail, logBoot, logFail, logPass, logWarn, TEST_FAIL } from './logTestStatus.js'
 import pc from '@brillout/picocolors'
 
 async function runAll(filter: null | FindFilter) {

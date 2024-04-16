@@ -3,7 +3,7 @@ export { isLinux }
 export { isWindows }
 export { isMac }
 
-import { assert } from './assert'
+import { assert } from './assert.js'
 
 function isWindows() {
   return process.platform === 'win32'

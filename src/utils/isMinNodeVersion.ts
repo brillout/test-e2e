@@ -1,6 +1,6 @@
 export { isMinNodeVersion }
 
-import { assert } from './assert'
+import { assert } from './assert.js'
 
 function isMinNodeVersion(minNodeVersion: 14) {
   const { version } = process

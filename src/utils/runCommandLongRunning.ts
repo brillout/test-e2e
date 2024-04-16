@@ -1,8 +1,8 @@
 export { runCommandLongRunning }
 
-import { spawn } from 'child_process'
+import { spawn as spawn_ } from 'child_process'
 import stripAnsi from 'strip-ansi'
-import { assert, runCommandShortLived, humanizeTime, isWindows, isLinux, isCallable } from '../utils.js'
+import { assert, runCommandShortLived, humanizeTime, isWindows, isLinux, isCallable, hasProp } from '../utils.js'
 import type { ChildProcessWithoutNullStreams } from 'child_process'
 
 function runCommandLongRunning({
@@ -271,4 +271,24 @@ async function killByPort(port: number) {
 
 function isSuccessCode(code: number | null): boolean {
   return code === 0 || code === null || (code === 1 && isWindows())
+}
+
+/* Doesn't work:
+const spawn2: typeof spawn_ = (...args) => spawn_(...args)
+const spawn3: typeof spawn_ = function(...args) { return spawn_(...args) }
+//*/
+function spawn(
+  command: Parameters<typeof spawn_>[0],
+  args: Parameters<typeof spawn_>[1],
+  options: Parameters<typeof spawn_>[2],
+): ChildProcessWithoutNullStreams {
+  // Workaround for Node.js regression:
+  //  - https://github.com/nodejs/node/issues/52475
+  //  - https://github.com/prebuild/prebuildify/issues/83#issuecomment-2056607495
+  if (isWindows()) options.shell = true
+
+  // Needed for spawn_() to return ChildProcessWithoutNullStreams instead of ChildProcess
+  assert(hasProp(options, 'stdio', 'undefined'))
+
+  return spawn_(command, args, options)
 }

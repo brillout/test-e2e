@@ -46,7 +46,7 @@
     "prettier": "^3.2.5",
     "typescript": "^5.4.5"
   },
-  "packageManager": "pnpm@8.15.1",
+  "packageManager": "pnpm@9.1.2",
   "repository": "github:brillout/test-e2e",
   "files": [
     "dist/"

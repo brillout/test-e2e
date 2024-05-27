@@ -1,3 +1,5 @@
+E2E test runner, using [Playwright](https://playwright.dev).
+
 Used by:
 - Vike
 - vike-react
@@ -5,4 +7,4 @@ Used by:
 - Telefunc
 - DocPress
 
-Don't use this: this package is meant for private use only (with publicly readable code). That said, feel free to fork and maintain your own version.
+Don't use this: this package isn't meant for others to use. That said, feel free to fork and maintain your own version.

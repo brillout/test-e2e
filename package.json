@@ -24,7 +24,7 @@
     "@brillout/part-regex": "^0.1.4",
     "@brillout/picocolors": "^1.0.9",
     "chai": "^4.3.6",
-    "esbuild": "^0.16.5",
+    "esbuild": "^0.23.0",
     "fast-glob": "^3.2.12",
     "node-fetch": "^2.6.1",
     "pixelmatch": "^5.3.0",

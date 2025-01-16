@@ -1,6 +1,7 @@
 export { isTolerateError }
 
 import { getConfig } from '../getConfig.js'
+import { getCurrentTestOptional } from '../getCurrentTest.js'
 import type { LogSource } from '../Logs.js'
 import stripAnsi from 'strip-ansi'
 
@@ -12,8 +13,9 @@ function isTolerateError({ logSource, logText }: LogData): boolean {
   if (tolerateErrorBuiltIn({ logSource, logText })) {
     return true
   }
+  const testInfo = getCurrentTestOptional()
   const config = getConfig()
-  if (config.tolerateError?.({ logSource, logText })) {
+  if (config.tolerateError?.({ logSource, logText, testInfo })) {
     return true
   }
   return false

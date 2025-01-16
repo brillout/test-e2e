@@ -49,7 +49,7 @@ async function testScreenshotFixture({
         [
           'The screenshot fixture was uploaded as GitHub Workflow Artifact.',
           `(See ${pc.bold('Summary')} > ${pc.bold('Artifacts')},`,
-          `and make sure to use the ${pc.bold('actions/upload-artifact@v3')} action`,
+          `and make sure to use the ${pc.bold('actions/upload-artifact')} action`,
           `otherwise the screenshot won't be uploaded`,
           `and the ${pc.bold('Artifacts')} section will be missing in the ${pc.bold('Summary')} page.)`,
           `Download the fixture, check it into the repository (so that it lives at ${pngFixturPath}), and try again: the test should now pass.`,

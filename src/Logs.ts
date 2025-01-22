@@ -108,7 +108,7 @@ function add({
   }
 }
 
-function expectLog(logText: string, logFilter?: (logEntry: LogEntry) => boolean) {
+function expectLog(logText: string, { filter: logFilter }: { filter?: (logEntry: LogEntry) => boolean } = {}) {
   let logsFound = logEntries.filter((logEntry) => {
     if (removeAnsi(logEntry).logText.includes(logText)) {
       logEntry.isNotFailure = true

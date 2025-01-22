@@ -117,9 +117,12 @@ function add({
  *
  * @param allLogs Search in all logs, including the logs of previous tests as well as the logs of the setup/prepare scripts. Usually used in combination with the `filter` parameter.
  */
-function expectLog(logText: string, { filter: logFilter, allLogs }: { filter?: (logEntry: LogEntry) => boolean, allLogs?: boolean } = {}) {
+function expectLog(
+  logText: string,
+  { filter: logFilter, allLogs }: { filter?: (logEntry: LogEntry) => boolean; allLogs?: boolean } = {},
+) {
   const logList = allLogs ? logEntriesAll : logEntries
-  let logsFound = logList.filter((logEntry) => {
+  const logsFound = logList.filter((logEntry) => {
     if (removeAnsi(logEntry).logText.includes(logText)) {
       logEntry.isNotFailure = true
       return true
@@ -130,11 +133,10 @@ function expectLog(logText: string, { filter: logFilter, allLogs }: { filter?: (
     throw new Error(`The following log was expected but it wasn't logged: "${logText}"`)
   }
   if (!logFilter) return
-  logsFound = logsFound.filter((logEntry) => logFilter(removeAnsi(logEntry)))
-  if (logsFound.length === 0) {
-    throw new Error(
-      `The following log was logged as expected, but it didn't match the logFilter() you provided: "${logText}"`,
-    )
+  const logsFoundAfterFilter = logsFound.filter((logEntry) => logFilter(removeAnsi(logEntry)))
+  if (logsFoundAfterFilter.length === 0) {
+    console.log(JSON.stringify(logsFound, null, 2))
+    throw new Error(`Logs above are matching "${logText}" but don't match the filter you provided.`)
   }
 }
 

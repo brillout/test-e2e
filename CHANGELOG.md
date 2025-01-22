@@ -1,3 +1,12 @@
+## [0.6.2](https://github.com/brillout/test-e2e/compare/v0.6.1...v0.6.2) (2025-01-22)
+
+
+### Bug Fixes
+
+* improve error message ([7361a7b](https://github.com/brillout/test-e2e/commit/7361a7bdcbbc1aefc021c0d3fe8c374d13252294))
+
+
+
 ## [0.6.1](https://github.com/brillout/test-e2e/compare/v0.6.0...v0.6.1) (2025-01-22)
 
 

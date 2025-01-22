@@ -35,6 +35,7 @@ type LogEntry = {
   loggedAfterExit: boolean
 }
 let logEntries: LogEntry[] = []
+const logEntriesAll: LogEntry[] = []
 
 function hasFailLogs(failOnWarning: boolean): boolean {
   const failLogs = getErrorLogs(failOnWarning)
@@ -100,6 +101,7 @@ function add({
     loggedAfterExit,
   }
   logEntries.push(logEntry)
+  logEntriesAll.push(logEntry)
   if (Logs.logEagerly) {
     let shouldLog = false
     if (Logs.logEagerly === 'all') shouldLog = true
@@ -108,8 +110,16 @@ function add({
   }
 }
 
-function expectLog(logText: string, { filter: logFilter }: { filter?: (logEntry: LogEntry) => boolean } = {}) {
-  let logsFound = logEntries.filter((logEntry) => {
+/**
+ * Expect a log to be printed.
+ *
+ * @param filter Only search in certain types of logs, e.g. only in browser- or server-side logs.
+ *
+ * @param allLogs Search in all logs, including the logs of previous tests as well as the logs of the setup/prepare scripts. Usually used in combination with the `filter` parameter.
+ */
+function expectLog(logText: string, { filter: logFilter, allLogs }: { filter?: (logEntry: LogEntry) => boolean, allLogs?: boolean } = {}) {
+  const logList = allLogs ? logEntriesAll : logEntries
+  let logsFound = logList.filter((logEntry) => {
     if (removeAnsi(logEntry).logText.includes(logText)) {
       logEntry.isNotFailure = true
       return true

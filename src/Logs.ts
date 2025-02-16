@@ -130,7 +130,7 @@ function expectLog(
     return false
   })
   if (logsFound.length === 0) {
-    throw new Error(`The following log was expected but it wasn't logged: "${logText}"`)
+    throw new Error(`The following log is expected but it wasn't logged: "${logText}"`)
   }
   if (!logFilter) return
   const logsFoundAfterFilter = logsFound.filter((logEntry) => logFilter(removeAnsi(logEntry)))

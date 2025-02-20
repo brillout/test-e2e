@@ -6,11 +6,6 @@ export { getProjectError }
 export { errorPrefix as projectErrorPrefix }
 
 import { projectInfo } from './projectInfo.js'
-import { Logs } from '../Logs.js'
-import { getCurrentTest } from '../getCurrentTest.js'
-import { logSection } from '../logSection.js'
-import { logError } from '../logError.js'
-import { logFail } from '../logTestStatus.js'
 
 const errorPrefix = `[${projectInfo.npmPackageName}]`
 const internalErrorPrefix = `${errorPrefix}[Bug]`
@@ -41,13 +36,7 @@ function assert(condition: unknown, debugInfo?: unknown): asserts condition {
     ].join(' '),
   )
 
-  logFail('a bug occurred in @brillout/test-e2e', true)
-  logError(internalError, 'BUG')
-  logDebugInfo()
-  Logs.logErrorsAndWarnings()
-  Logs.flushLogs()
-
-  throw new Error('Bug. See messages above.')
+  throw internalError
 }
 
 function assertUsage(condition: unknown, errorMessage: string): asserts condition {
@@ -85,15 +74,4 @@ function assertInfo(condition: unknown, errorMessage: string): void {
     return
   }
   console.warn(`${infoPrefix} ${errorMessage}`)
-}
-
-function logDebugInfo() {
-  logSection('DEBUG INFO')
-  const testInfo = getCurrentTest()
-  console.log('testInfo.hasStartedRunning', testInfo.hasStartedRunning)
-  console.log('testInfo.skipped?.reason', testInfo.skipped?.reason)
-  console.log('testInfo.runInfo', testInfo.runInfo)
-  console.log('testInfo.testFile', testInfo.testFile)
-  console.log('testInfo.testName', testInfo.testName)
-  console.log('process.platform', process.platform)
 }

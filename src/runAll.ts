@@ -28,9 +28,6 @@ async function runAll(filter: null | FindFilter) {
   const hasFailedTestFile = failedTestFiles.length > 0
   const hasFailLog = hasFail()
   if (hasFailedTestFile || hasFailLog) {
-    // hasFailedTestFile and hasFailLog are redundant
-    //  - When assert.ts calls logFail() this code block isn't run
-    assert(hasFailedTestFile && hasFailLog)
     assert(failedTestFiles.length > 0)
     throw new Error(
       pc.red(

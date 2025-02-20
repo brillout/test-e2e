@@ -1,3 +1,14 @@
+## [0.6.3](https://github.com/brillout/test-e2e/compare/v0.6.2...v0.6.3) (2025-02-20)
+
+
+### Bug Fixes
+
+* remove failing assert ([073eaf9](https://github.com/brillout/test-e2e/commit/073eaf9bee07aea46712538a36368abc3bbb082d))
+* simplify assert() impl ([d4a05bb](https://github.com/brillout/test-e2e/commit/d4a05bbc34475c47a995a1daeb6cdc257157e9ba))
+* typo ([c58016e](https://github.com/brillout/test-e2e/commit/c58016e9b7d830aa7e6a67aa090537ff54584b5a))
+
+
+
 ## [0.6.2](https://github.com/brillout/test-e2e/compare/v0.6.1...v0.6.2) (2025-01-22)
 
 

@@ -121,8 +121,6 @@ function runCommandLongRunning({
 
     if (errMsg) {
       onError(new Error(errMsg), true)
-    } else {
-      assert(isReady)
     }
 
     exitPromiseResolve()

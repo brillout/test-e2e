@@ -1,3 +1,12 @@
+## [0.6.4](https://github.com/brillout/test-e2e/compare/v0.6.3...v0.6.4) (2025-03-20)
+
+
+### Bug Fixes
+
+* remove faulty assert() ([a3ea521](https://github.com/brillout/test-e2e/commit/a3ea5210f32f9d9f5bf69e6ea3d0bb4e5d442b6e))
+
+
+
 ## [0.6.3](https://github.com/brillout/test-e2e/compare/v0.6.2...v0.6.3) (2025-02-20)
 
 

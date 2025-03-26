@@ -44,7 +44,7 @@ function assertConfig(config: unknown): asserts config is Config {
       // https://github.com/brillout/vite-plugin-ssr/blob/4fa329e4081655c39c4c70436ae73e563489439e/.github/workflows/ci/getTestJobs.mjs#L72
       return
     } else {
-      assertUsage(false, `${configFileName} unknown config ${key}`)
+      // assertUsage(false, `${configFileName} unknown config ${key}`)
     }
   })
 }

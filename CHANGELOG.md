@@ -1,3 +1,12 @@
+## [0.6.6](https://github.com/brillout/test-e2e/compare/v0.6.5...v0.6.6) (2025-03-26)
+
+
+### Bug Fixes
+
+* remove config validation ([d460f07](https://github.com/brillout/test-e2e/commit/d460f070a89c46930c78f53b472ebbb7bb155b4b))
+
+
+
 ## [0.6.5](https://github.com/brillout/test-e2e/compare/v0.6.4...v0.6.5) (2025-03-26)
 
 

@@ -3,10 +3,12 @@ export { getBrowser }
 import { Browser, chromium } from 'playwright-chromium'
 import { Logs } from './Logs.js'
 import { assert, logProgress } from './utils.js'
+import { getConfig } from './getConfig.js'
 
 let browser: Browser | undefined
 async function getBrowser() {
   if (!browser) {
+    const config = getConfig()
     const done = logProgress('Launch Browser')
     browser = await chromium.launch({
       headless: true,
@@ -21,6 +23,7 @@ async function getBrowser() {
           })
         },
       },
+      ...config.chromiumLaunchOptions,
     })
     done()
   }

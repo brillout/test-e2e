@@ -4,12 +4,14 @@ export { loadConfig }
 import path from 'path'
 import fs from 'fs'
 import { assert, assertUsage, fsWindowsBugWorkaround, isCallable, isObject } from './utils.js'
+import type { LaunchOptions } from 'playwright-chromium'
 
 const configFileName = 'test-e2e.config.mjs'
 
 type Config = {
   tolerateError?: Function
   ci?: never
+  chromiumLaunchOptions?: LaunchOptions
 }
 
 let config: null | Config = null

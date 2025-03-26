@@ -1,3 +1,12 @@
+## [0.6.5](https://github.com/brillout/test-e2e/compare/v0.6.4...v0.6.5) (2025-03-26)
+
+
+### Features
+
+* chromiumLaunchOptions ([906a964](https://github.com/brillout/test-e2e/commit/906a96470536280e07177c7e71da7a8253b292d9))
+
+
+
 ## [0.6.4](https://github.com/brillout/test-e2e/compare/v0.6.3...v0.6.4) (2025-03-20)
 
 

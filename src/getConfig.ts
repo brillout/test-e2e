@@ -3,7 +3,7 @@ export { loadConfig }
 
 import path from 'path'
 import fs from 'fs'
-import { assert, assertUsage, fsWindowsBugWorkaround, isCallable, isObject } from './utils.js'
+import { assert, assertUsage, fsWindowsBugWorkaround, isObject } from './utils.js'
 import type { LaunchOptions } from 'playwright-chromium'
 
 const configFileName = 'test-e2e.config.mjs'
@@ -35,18 +35,6 @@ async function loadConfig(): Promise<void> {
 
 function assertConfig(config: unknown): asserts config is Config {
   assertUsage(isObject(config), `${configFileName} default export should be an object`)
-  Object.entries(config).forEach(([key, val]) => {
-    const wrongType = `${configFileName} export default { ${key} } should be a` as const
-    if (key === 'tolerateError') {
-      assertUsage(isCallable(val), `${wrongType} function`)
-    } else if (key === 'ci') {
-      // Only used by .github/workflows/ci/getTestJobs.mjs
-      // https://github.com/brillout/vite-plugin-ssr/blob/4fa329e4081655c39c4c70436ae73e563489439e/.github/workflows/ci/getTestJobs.mjs#L72
-      return
-    } else {
-      // assertUsage(false, `${configFileName} unknown config ${key}`)
-    }
-  })
 }
 
 function find(): null | string {

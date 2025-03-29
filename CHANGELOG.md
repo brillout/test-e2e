@@ -1,3 +1,12 @@
+## [0.6.7](https://github.com/brillout/test-e2e/compare/v0.6.6...v0.6.7) (2025-03-29)
+
+
+### Features
+
+* `tolerateError: true` ([faf2027](https://github.com/brillout/test-e2e/commit/faf2027c913c0efcf91412e143639bfdf56a8533))
+
+
+
 ## [0.6.6](https://github.com/brillout/test-e2e/compare/v0.6.5...v0.6.6) (2025-03-26)
 
 

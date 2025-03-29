@@ -1,3 +1,12 @@
+## [0.6.8](https://github.com/brillout/test-e2e/compare/v0.6.7...v0.6.8) (2025-03-29)
+
+
+### Bug Fixes
+
+* remove validation ([a832722](https://github.com/brillout/test-e2e/commit/a832722eabf587d61eeed0a3ea2d5ee4f6bed859))
+
+
+
 ## [0.6.7](https://github.com/brillout/test-e2e/compare/v0.6.6...v0.6.7) (2025-03-29)
 
 

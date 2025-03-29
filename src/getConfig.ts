@@ -9,7 +9,7 @@ import type { LaunchOptions } from 'playwright-chromium'
 const configFileName = 'test-e2e.config.mjs'
 
 type Config = {
-  tolerateError?: Function
+  tolerateError?: Function | true
   ci?: never
   chromiumLaunchOptions?: LaunchOptions
 }

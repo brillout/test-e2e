@@ -1,3 +1,12 @@
+## [0.6.10](https://github.com/brillout/test-e2e/compare/v0.6.9...v0.6.10) (2025-05-16)
+
+
+### Features
+
+* logInfo ([e5bb24f](https://github.com/brillout/test-e2e/commit/e5bb24f07ef59e6f124c61105dd7b9318d5b6fbf))
+
+
+
 ## [0.6.9](https://github.com/brillout/test-e2e/compare/v0.6.8...v0.6.9) (2025-05-16)
 
 

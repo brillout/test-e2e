@@ -1,3 +1,13 @@
+## [0.6.9](https://github.com/brillout/test-e2e/compare/v0.6.8...v0.6.9) (2025-05-16)
+
+
+### Bug Fixes
+
+* apply --bail upon browser error ([3b9f2da](https://github.com/brillout/test-e2e/commit/3b9f2da01424532a9e141edfb296a70d98341b01))
+* improve browser logs ([1a95a18](https://github.com/brillout/test-e2e/commit/1a95a181f468ab24998eae333f434cc23c360206))
+
+
+
 ## [0.6.8](https://github.com/brillout/test-e2e/compare/v0.6.7...v0.6.8) (2025-03-29)
 
 

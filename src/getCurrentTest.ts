@@ -42,6 +42,7 @@ type TestInfo = {
   terminateServer?: () => Promise<void>
   afterEach?: (hasFailed: boolean) => void
   page?: Page
+  aborted?: true
 }
 let testInfo: null | TestInfo = null
 

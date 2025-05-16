@@ -219,7 +219,7 @@ async function runTests(testInfo: TestInfo, isFinalAttempt: boolean): Promise<bo
       const hasErrorLog = Logs.hasFailLogs(failOnWarning)
       const isFailure = err || hasErrorLog
       if (isFailure) {
-        if (err) {
+        if (err && !testInfo.aborted) {
           logFailure(err, `the test "${testDesc}" threw an error`, isFinalAttempt)
         } else if (hasErrorLog) {
           logFailure(

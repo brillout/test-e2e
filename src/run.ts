@@ -114,7 +114,9 @@ function run(
         }
         return 'Browser Log'
       })(),
-      logText: JSON.stringify(
+      logText: msg.text(),
+      /* Seems like the information below isn't that useful.
+      JSON.stringify(
         {
           type,
           text: msg.text(),
@@ -124,6 +126,7 @@ function run(
         null,
         2,
       ),
+      */
     })
   }
   // For uncaught exceptions

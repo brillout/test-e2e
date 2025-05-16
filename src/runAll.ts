@@ -157,8 +157,13 @@ async function runServerAndTests(browser: Browser, isThirdAttempt: boolean, isFl
 
   let success = await runTests(testInfo, isFinalAttempt)
 
-  await testInfo.terminateServer()
-  await page.close()
+  return await closeTest(testInfo, success, isFinalAttempt)
+}
+
+async function closeTest(testInfo: TestInfo, success: boolean, isFinalAttempt: boolean) {
+  await testInfo.terminateServer!()
+  await testInfo.page!.close()
+
   // Check whether stderr emitted during testInfo.terminateServer()
   if (success) {
     const failOnWarning = true

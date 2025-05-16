@@ -30,6 +30,7 @@ type LogSource =
 type LogEntry = {
   logSource: LogSource
   logText: string
+  logInfo: string
   logTimestamp: string
   isNotFailure: boolean
   loggedAfterExit: boolean
@@ -85,10 +86,12 @@ function flushLogs() {
 function add({
   logSource,
   logText,
+  logInfo = '',
   loggedAfterExit = false,
 }: {
   logSource: LogSource
   logText: string
+  logInfo?: string
   loggedAfterExit?: boolean
 }) {
   const logTimestamp = getTimestamp()
@@ -96,6 +99,7 @@ function add({
   const logEntry = {
     logSource,
     logText,
+    logInfo,
     logTimestamp,
     isNotFailure: isTolerateError({ logSource, logText }),
     loggedAfterExit,

@@ -116,18 +116,15 @@ function run(
         return 'Browser Log'
       })(),
       logText: msg.text(),
-      /* Seems like the information below isn't that useful.
-      JSON.stringify(
+      logInfo: JSON.stringify(
         {
           type,
-          text: msg.text(),
           location: msg.location(),
           args: msg.args(),
         },
         null,
         2,
       ),
-      */
     })
     if (isError) await terminateUponBrowserError()
   }

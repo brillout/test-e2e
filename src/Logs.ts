@@ -39,11 +39,11 @@ let logEntries: LogEntry[] = []
 const logEntriesAll: LogEntry[] = []
 
 function hasFailLogs(failOnWarning: boolean): boolean {
-  const failLogs = getErrorLogs(failOnWarning)
+  const failLogs = getErrorLogs({ includeBrowserWarnings: failOnWarning })
   return failLogs.length > 0
 }
 
-function getErrorLogs(includeBrowserWarnings: boolean) {
+function getErrorLogs({ includeBrowserWarnings }: { includeBrowserWarnings: boolean }) {
   const errorLogs = logEntries.filter((logEntry) => {
     if (logEntry.isNotFailure) {
       return false
@@ -72,7 +72,7 @@ function clearLogs() {
 }
 
 function logErrorsAndWarnings() {
-  const errorAndWarningLogs = getErrorLogs(true)
+  const errorAndWarningLogs = getErrorLogs({ includeBrowserWarnings: true })
   if (errorAndWarningLogs.length === 0) return
   logSection('ERROR & WARNING LOGS')
   errorAndWarningLogs.forEach((logEntry) => printLog(logEntry))

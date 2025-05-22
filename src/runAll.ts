@@ -219,16 +219,30 @@ async function runTests(testInfo: TestInfo, isFinalAttempt: boolean): Promise<bo
       const hasErrorLog = Logs.hasFailLogs(failOnWarning)
       const isFailure = err || hasErrorLog
       if (isFailure) {
-        if (err && !testInfo.aborted) {
+        if (
+          err &&
+          // When aborting (using the page.close() trick) the following `err` is triggered which irrelevant for the user.
+          // ```
+          // proxy.goto: Target page, context or browser has been closed
+          //    at .testRun.ts:21:16
+          //    at runTest (file:///home/rom/code/test-e2e/src/runAll.ts:265:24)
+          //    at runTests (file:///home/rom/code/test-e2e/src/runAll.ts:211:13)
+          //    at runServerAndTests (file:///home/rom/code/test-e2e/src/runAll.ts:164:17)
+          //    at buildAndTest (file:///home/rom/code/test-e2e/src/runAll.ts:142:19)
+          //    at runTestFiles (file:///home/rom/code/test-e2e/src/runAll.ts:56:34)
+          //    at runAll (file:///home/rom/code/test-e2e/src/runAll.ts:26:27) {
+          //  name: 'Error'
+          //}
+          !testInfo.aborted
+        ) {
           logFailure(err, `the test "${testDesc}" threw an error`, isFinalAttempt)
-        } else if (hasErrorLog) {
+        } else {
+          assert(hasErrorLog)
           logFailure(
             null,
             `${getErrorType(failOnWarning)} occurred while running the test "${testDesc}"`,
             isFinalAttempt,
           )
-        } else {
-          assert(false)
         }
         return false
       }

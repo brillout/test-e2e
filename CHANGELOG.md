@@ -1,3 +1,13 @@
+## [0.6.11](https://github.com/brillout/test-e2e/compare/v0.6.10...v0.6.11) (2025-05-22)
+
+
+### Bug Fixes
+
+* apply --bail also upon stderr ([46ed9bf](https://github.com/brillout/test-e2e/commit/46ed9bf616a2299f9feaf1a0c0b741b89d45685e))
+* set --bail when run locally ([202fcfa](https://github.com/brillout/test-e2e/commit/202fcfa83a3a1fd415fd4a99438f9572a4748ea1))
+
+
+
 ## [0.6.10](https://github.com/brillout/test-e2e/compare/v0.6.9...v0.6.10) (2025-05-16)
 
 

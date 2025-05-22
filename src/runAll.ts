@@ -216,8 +216,11 @@ async function runTests(testInfo: TestInfo, isFinalAttempt: boolean): Promise<bo
     testInfo.afterEach(!!err)
     {
       const failOnWarning = !testInfo.runInfo.doNotFailOnWarning
-      const hasErrorLog = Logs.hasFailureLog({ includeBrowserWarnings: failOnWarning, includeStderr: failOnWarning })
-      const isFailure = err || hasErrorLog
+      const isFailureFromLogs = Logs.hasFailureLog({
+        includeBrowserWarnings: failOnWarning,
+        includeStderr: failOnWarning,
+      })
+      const isFailure = err || isFailureFromLogs
       if (isFailure) {
         if (
           err &&

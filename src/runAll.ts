@@ -14,21 +14,19 @@ import { logError } from './logError.js'
 import { hasFail, logBoot, logFail, logPass, logWarn, TEST_FAIL } from './logTestStatus.js'
 import pc from '@brillout/picocolors'
 
-let browser: Browser
-
 async function runAll(filter: null | FindFilter) {
   await loadConfig()
 
   const testFiles = await findTestFiles(filter)
 
-  browser = await getBrowser()
+  const browser = await getBrowser()
 
   const failedTestFiles = await runTestFiles(testFiles, browser)
 
-  await closeAll(failedTestFiles)
+  await closeAll(failedTestFiles, browser)
 }
 
-async function closeAll(failedTestFiles: string[]) {
+async function closeAll(failedTestFiles: string[], browser: Browser) {
   await browser.close()
 
   const hasFailedTestFile = failedTestFiles.length > 0

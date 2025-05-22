@@ -1,3 +1,13 @@
+## [0.6.12](https://github.com/brillout/test-e2e/compare/v0.6.11...v0.6.12) (2025-05-22)
+
+
+### Bug Fixes
+
+* fix assertion ([be48737](https://github.com/brillout/test-e2e/commit/be48737c5ce5d8470a51daf3888b8c5e4a25a157))
+* refine bailing ([4eb02f9](https://github.com/brillout/test-e2e/commit/4eb02f9144dcdf90a5c56ba356557168bd8a755e))
+
+
+
 ## [0.6.11](https://github.com/brillout/test-e2e/compare/v0.6.10...v0.6.11) (2025-05-22)
 
 

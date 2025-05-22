@@ -39,11 +39,14 @@ let logEntries: LogEntry[] = []
 const logEntriesAll: LogEntry[] = []
 
 function hasFailLogs(failOnWarning: boolean): boolean {
-  const failLogs = getErrorLogs({ includeBrowserWarnings: failOnWarning })
+  const failLogs = getErrorLogs({ includeBrowserWarnings: failOnWarning, includeStderr: failOnWarning })
   return failLogs.length > 0
 }
 
-function getErrorLogs({ includeBrowserWarnings }: { includeBrowserWarnings: boolean }) {
+function getErrorLogs({
+  includeBrowserWarnings,
+  includeStderr,
+}: { includeBrowserWarnings: boolean; includeStderr: boolean }) {
   const errorLogs = logEntries.filter((logEntry) => {
     if (logEntry.isNotFailure) {
       return false
@@ -56,7 +59,10 @@ function getErrorLogs({ includeBrowserWarnings }: { includeBrowserWarnings: bool
     if (logSource === 'run() failure') {
       return true
     }
-    if (includeBrowserWarnings && (logSource === 'Browser Warning' || logSource === 'stderr')) {
+    if (logSource === 'Browser Warning' && includeBrowserWarnings) {
+      return true
+    }
+    if (logSource === 'stderr' && includeStderr) {
       return true
     }
     if (logSource === 'Browser Error') {
@@ -72,7 +78,7 @@ function clearLogs() {
 }
 
 function logErrorsAndWarnings() {
-  const errorAndWarningLogs = getErrorLogs({ includeBrowserWarnings: true })
+  const errorAndWarningLogs = getErrorLogs({ includeBrowserWarnings: true, includeStderr: true })
   if (errorAndWarningLogs.length === 0) return
   logSection('ERROR & WARNING LOGS')
   errorAndWarningLogs.forEach((logEntry) => printLog(logEntry))

@@ -145,6 +145,10 @@ async function terminateUponErrorLog() {
   // }
   // ```
   await testInfo.page!.close()
+  /* The trick above doesn't always work, and the following doesn't seem to make a difference.
+  const browser = await getBrowser()
+  await browser.close()
+  */
 }
 
 /**

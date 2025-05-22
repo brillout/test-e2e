@@ -174,7 +174,7 @@ async function closeTest(testInfo: TestInfo, success: boolean, isFinalAttempt: b
   if (success) {
     const failOnWarning = true
     if (
-      Logs.hasFailLogs(failOnWarning) &&
+      Logs.hasFailureLog(failOnWarning) &&
       // See comments about taskkill in src/utils/runCommandLongRunning.ts
       !isWindows()
     ) {
@@ -216,7 +216,7 @@ async function runTests(testInfo: TestInfo, isFinalAttempt: boolean): Promise<bo
     testInfo.afterEach(!!err)
     {
       const failOnWarning = !testInfo.runInfo.doNotFailOnWarning
-      const hasErrorLog = Logs.hasFailLogs(failOnWarning)
+      const hasErrorLog = Logs.hasFailureLog(failOnWarning)
       const isFailure = err || hasErrorLog
       if (isFailure) {
         if (

@@ -4,7 +4,7 @@ export const Logs = {
   flushLogs,
   logErrorsAndWarnings,
   clearLogs,
-  hasFailLogs,
+  hasFailureLog,
   logEagerly: false as false | 'all' | 'logs',
 }
 export type { LogSource }
@@ -38,7 +38,7 @@ type LogEntry = {
 let logEntries: LogEntry[] = []
 const logEntriesAll: LogEntry[] = []
 
-function hasFailLogs(failOnWarning: boolean): boolean {
+function hasFailureLog(failOnWarning: boolean): boolean {
   const failLogs = getErrorLogs({ includeBrowserWarnings: failOnWarning, includeStderr: failOnWarning })
   return failLogs.length > 0
 }
@@ -127,7 +127,7 @@ async function terminateUponErrorLog() {
   if (!cliOptions.bail) return
   const testInfo = getCurrentTest()
   testInfo.aborted = true
-  assert(hasFailLogs(false))
+  assert(hasFailureLog(false))
   // Trick to abort the test: page.close() triggers the following error.
   // ```console
   // proxy.waitForFunction: Target closed

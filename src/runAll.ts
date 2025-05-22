@@ -240,7 +240,7 @@ async function runTests(testInfo: TestInfo, isFinalAttempt: boolean): Promise<bo
         ) {
           logFailure(err, `the test "${testDesc}" threw an error`, isFinalAttempt)
         } else {
-          assert(hasErrorLog)
+          assert(Logs.hasFailureLog({ includeBrowserWarnings: failOnWarning, includeStderr: true }))
           logFailure(
             null,
             `${getErrorType(failOnWarning)} occurred while running the test "${testDesc}"`,

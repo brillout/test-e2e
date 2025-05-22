@@ -102,12 +102,11 @@ function run(
   return
 
   // Also called when the page throws an error or a warning
-  async function onConsole(msg: ConsoleMessage) {
+  function onConsole(msg: ConsoleMessage) {
     const type = msg.type()
-    const isError = type === 'error'
     Logs.add({
       logSource: (() => {
-        if (isError) {
+        if (type === 'error') {
           return 'Browser Error'
         }
         if (type === 'warning') {
@@ -126,10 +125,9 @@ function run(
         2,
       ),
     })
-    if (isError) await terminateUponBrowserError()
   }
   // For uncaught exceptions
-  async function onPageError(err: Error) {
+  function onPageError(err: Error) {
     Logs.add({
       logSource: 'Browser Error',
       logText: JSON.stringify(
@@ -141,22 +139,6 @@ function run(
         2,
       ),
     })
-    await terminateUponBrowserError()
-  }
-
-  async function terminateUponBrowserError() {
-    if (!cliOptions.bail) return
-    testInfo.aborted = true
-    // Trick to abort the test: page.close() triggers the following error.
-    // ```console
-    // proxy.waitForFunction: Target closed
-    //     at clientSideNavigation (.testRun.ts:16:16)
-    //     at .testRun.ts:11:5
-    //     at file:///home/rom/code/test-e2e/src/runAll.ts:278:7 {
-    //   name: 'Error'
-    // }
-    // ```
-    await testInfo.page!.close()
   }
 }
 

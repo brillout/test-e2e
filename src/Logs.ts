@@ -9,9 +9,9 @@ export const Logs = {
 }
 export type { LogSource }
 
-import { assert, ensureNewTerminalLine, isWindows } from './utils.js'
+import { assert, cliOptions, ensureNewTerminalLine, isWindows } from './utils.js'
 import pc from '@brillout/picocolors'
-import { getCurrentTestOptional } from './getCurrentTest.js'
+import { getCurrentTest, getCurrentTestOptional } from './getCurrentTest.js'
 import { logSection } from './logSection.js'
 import { isTolerateError } from './Logs/isTolerateError.js'
 import stripAnsi from 'strip-ansi'
@@ -112,6 +112,25 @@ function add({
     if (Logs.logEagerly === 'logs' && logSource !== 'Playwright') shouldLog = true
     if (shouldLog) printLog(logEntry)
   }
+  if (logSource === 'Browser Error' || logSource === 'stderr') {
+    terminateUponErrorLog()
+  }
+}
+
+async function terminateUponErrorLog() {
+  if (!cliOptions.bail) return
+  const testInfo = getCurrentTest()
+  testInfo.aborted = true
+  // Trick to abort the test: page.close() triggers the following error.
+  // ```console
+  // proxy.waitForFunction: Target closed
+  //     at clientSideNavigation (.testRun.ts:16:16)
+  //     at .testRun.ts:11:5
+  //     at file:///home/rom/code/test-e2e/src/runAll.ts:278:7 {
+  //   name: 'Error'
+  // }
+  // ```
+  await testInfo.page!.close()
 }
 
 /**

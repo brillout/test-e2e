@@ -121,7 +121,11 @@ function add({
     if (Logs.logEagerly === 'logs' && logSource !== 'Playwright') shouldLog = true
     if (shouldLog) printLog(logEntry)
   }
-  if (logSource === 'Browser Error' || logSource === 'stderr') {
+  if (
+    logSource === 'Browser Error' ||
+    // TODO/now
+    logSource === 'stderr'
+  ) {
     terminateUponErrorLog()
   }
 }

@@ -121,6 +121,7 @@ async function terminateUponErrorLog() {
   if (!cliOptions.bail) return
   const testInfo = getCurrentTest()
   testInfo.aborted = true
+  assert(hasFailLogs(false))
   // Trick to abort the test: page.close() triggers the following error.
   // ```console
   // proxy.waitForFunction: Target closed

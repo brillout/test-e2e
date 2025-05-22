@@ -18,6 +18,7 @@ import { TIMEOUT_TEST_FUNCTION } from './TIMEOUTS.js'
 type TestInfo = {
   testFile: string
   testName: string
+  isTestFunctionRunning?: true
   // testRun: () => Promise<void>
   tests?: {
     testDesc: string

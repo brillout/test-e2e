@@ -57,7 +57,7 @@ async function runTestFiles(testFiles: string[], browser: Browser): Promise<stri
       if (!isFlaky) {
         doNotRetry = true
       }
-      if (cliOptions.bail) {
+      if (cliOptions.bail || !isCI()) {
         return failedTestFiles
       }
     }
@@ -199,6 +199,7 @@ async function runTests(testInfo: TestInfo, isFinalAttempt: boolean): Promise<bo
     // When user hasn't any test() call
     []
   for (const { testDesc, testFn } of tests) {
+    testInfo.isTestFunctionRunning = true
     Logs.add({
       logSource: 'test()',
       logText: testDesc,
@@ -250,6 +251,7 @@ async function runTests(testInfo: TestInfo, isFinalAttempt: boolean): Promise<bo
     }
     Logs.clearLogs()
   }
+  delete testInfo.isTestFunctionRunning
 
   return true
 }

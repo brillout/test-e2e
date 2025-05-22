@@ -9,7 +9,7 @@ export const Logs = {
 }
 export type { LogSource }
 
-import { assert, cliOptions, ensureNewTerminalLine, isWindows } from './utils.js'
+import { assert, cliOptions, ensureNewTerminalLine, isCI, isWindows } from './utils.js'
 import pc from '@brillout/picocolors'
 import { getCurrentTest, getCurrentTestOptional } from './getCurrentTest.js'
 import { logSection } from './logSection.js'
@@ -121,18 +121,17 @@ function add({
     if (Logs.logEagerly === 'logs' && logSource !== 'Playwright') shouldLog = true
     if (shouldLog) printLog(logEntry)
   }
-  if (
-    logSource === 'Browser Error' ||
-    // TODO/now
-    logSource === 'stderr'
-  ) {
-    terminateUponErrorLog()
+  if (logSource === 'Browser Error' || logSource === 'stderr') {
+    terminateUponErrorLog(logSource)
   }
 }
 
-async function terminateUponErrorLog() {
-  if (!cliOptions.bail) return
+async function terminateUponErrorLog(logSource: 'Browser Error' | 'stderr') {
+  const shouldBail = cliOptions.bail || (logSource === 'Browser Error' && !isCI())
+  if (!shouldBail) return
   const testInfo = getCurrentTest()
+  // Skip bailing upon stderr logs while spinning up the server
+  if (logSource === 'stderr' && !testInfo.isTestFunctionRunning) return
   testInfo.aborted = true
   assert(Logs.hasFailureLog({ includeBrowserWarnings: false, includeStderr: true }))
   // Trick to abort the test: page.close() triggers the following error.

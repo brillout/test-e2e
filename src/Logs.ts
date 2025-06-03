@@ -105,12 +105,13 @@ function add({
 }) {
   const logTimestamp = getTimestamp()
 
+  const isNotFailure = isTolerateError({ logSource, logText })
   const logEntry = {
     logSource,
     logText,
     logInfo,
     logTimestamp,
-    isNotFailure: isTolerateError({ logSource, logText }),
+    isNotFailure,
     loggedAfterExit,
   }
   logEntries.push(logEntry)
@@ -121,7 +122,7 @@ function add({
     if (Logs.logEagerly === 'logs' && logSource !== 'Playwright') shouldLog = true
     if (shouldLog) printLog(logEntry)
   }
-  if (logSource === 'Browser Error' || logSource === 'stderr') {
+  if ((logSource === 'Browser Error' || logSource === 'stderr') && !isNotFailure) {
     terminateUponErrorLog(logSource)
   }
 }

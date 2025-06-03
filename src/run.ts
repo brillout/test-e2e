@@ -130,14 +130,8 @@ function run(
   function onPageError(err: Error) {
     Logs.add({
       logSource: 'Browser Error',
-      logText: JSON.stringify(
-        {
-          text: err.message,
-          location: err.stack,
-        },
-        null,
-        2,
-      ),
+      logText: err.stack || err.message,
+      logInfo: JSON.stringify({ errorMessage: err.message }, null, 2),
     })
   }
 }

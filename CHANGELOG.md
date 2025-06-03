@@ -1,3 +1,13 @@
+## [0.6.13](https://github.com/brillout/test-e2e/compare/v0.6.12...v0.6.13) (2025-06-03)
+
+
+### Bug Fixes
+
+* improve browser error logging ([b174854](https://github.com/brillout/test-e2e/commit/b17485405bc833a70212aeae38781633208379eb))
+* minor fix ([c40bd3e](https://github.com/brillout/test-e2e/commit/c40bd3e21350797093425591bacdfb351e8ecf89))
+
+
+
 ## [0.6.12](https://github.com/brillout/test-e2e/compare/v0.6.11...v0.6.12) (2025-05-22)
 
 

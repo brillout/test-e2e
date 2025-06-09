@@ -1,3 +1,12 @@
+## [0.6.14](https://github.com/brillout/test-e2e/compare/v0.6.13...v0.6.14) (2025-06-09)
+
+
+### Bug Fixes
+
+* set --bail to false by default ([f2c432b](https://github.com/brillout/test-e2e/commit/f2c432b431fdace685ca573edc12bba48c63c8ee))
+
+
+
 ## [0.6.13](https://github.com/brillout/test-e2e/compare/v0.6.12...v0.6.13) (2025-06-03)
 
 

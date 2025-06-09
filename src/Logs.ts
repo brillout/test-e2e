@@ -128,7 +128,7 @@ function add({
 }
 
 async function terminateUponErrorLog(logSource: 'Browser Error' | 'stderr') {
-  const shouldBail = cliOptions.bail || (logSource === 'Browser Error' && !isCI())
+  const shouldBail = cliOptions.bail
   if (!shouldBail) return
   const testInfo = getCurrentTest()
   // Skip bailing upon stderr logs while spinning up the server

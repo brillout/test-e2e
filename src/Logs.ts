@@ -9,7 +9,7 @@ export const Logs = {
 }
 export type { LogSource }
 
-import { assert, cliOptions, ensureNewTerminalLine, isCI, isWindows } from './utils.js'
+import { assert, cliOptions, ensureNewTerminalLine, isWindows } from './utils.js'
 import pc from '@brillout/picocolors'
 import { getCurrentTest, getCurrentTestOptional } from './getCurrentTest.js'
 import { logSection } from './logSection.js'

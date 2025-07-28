@@ -14,6 +14,7 @@ import type { Page } from 'playwright-chromium'
 import { assert } from './utils.js'
 import path from 'path'
 import { TIMEOUT_TEST_FUNCTION } from './TIMEOUTS.js'
+import type { TolerateError } from './Logs/isTolerateError.js'
 
 type TestInfo = {
   testFile: string
@@ -26,6 +27,7 @@ type TestInfo = {
   }[]
   testOptions?: {
     doNotFailOnWarning: boolean
+    tolerateError?: TolerateError
     testFunctionTimeout: number
     isFlaky: boolean
   }
@@ -33,6 +35,7 @@ type TestInfo = {
     cmd: string
     serverUrl: string
     doNotFailOnWarning: boolean
+    tolerateError?: TolerateError
     testFunctionTimeout: number
     isFlaky: boolean
     isRunCommandThatTerminates: boolean
@@ -93,6 +96,7 @@ function setRunInfo({
   serverUrl = serverUrlDefault,
   additionalTimeout = 0,
   doNotFailOnWarning = false,
+  tolerateError,
   isFlaky = false,
   isRunCommandThatTerminates = false,
 }: {
@@ -100,6 +104,7 @@ function setRunInfo({
   serverUrl?: string
   additionalTimeout?: number
   doNotFailOnWarning?: boolean
+  tolerateError?: TolerateError
   isFlaky?: boolean
   isRunCommandThatTerminates?: boolean
 }) {
@@ -110,6 +115,7 @@ function setRunInfo({
     serverUrl,
     testFunctionTimeout,
     doNotFailOnWarning,
+    tolerateError,
     isFlaky,
     isRunCommandThatTerminates,
   }

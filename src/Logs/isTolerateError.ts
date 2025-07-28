@@ -19,12 +19,18 @@ function isTolerateError({ logSource, logText }: LogData): boolean {
     return true
   }
   const testInfo = getCurrentTestOptional()
-  const config = getConfig()
-  const { tolerateError } = config
-  if (tolerateError === true) return true
-  if (tolerateError?.({ logSource, logText, testInfo })) {
-    return true
+
+  const isTolerated = (tolerateError?: TolerateError) => {
+    if (tolerateError === true) return true
+    if (tolerateError?.({ logSource, logText, testInfo })) {
+      return true
+    }
   }
+
+  const config = getConfig()
+  if (isTolerated(config.tolerateError)) return true
+  if (isTolerated(testInfo?.runInfo?.tolerateError)) return true
+
   return false
 }
 

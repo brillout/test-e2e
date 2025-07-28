@@ -8,6 +8,7 @@ import { editFileAssertReverted, editFileRevert } from './editFile.js'
 import { getCurrentTest, getCwd, getServerUrl, setRunInfo } from './getCurrentTest.js'
 import { page } from './page.js'
 import { TIMEOUT_NPM_SCRIPT, TIMEOUT_PLAYWRIGHT, TIMEOUT_PROCESS_TERMINATION } from './TIMEOUTS.js'
+import type { TolerateError } from './Logs/isTolerateError.js'
 
 function run(
   cmd: string,
@@ -19,6 +20,7 @@ function run(
     inspect = cliOptions.inspect,
     cwd,
     doNotFailOnWarning,
+    tolerateError,
     serverUrl,
     isFlaky,
   }: {
@@ -30,6 +32,7 @@ function run(
     /** deprecated */
     cwd?: string
     doNotFailOnWarning?: boolean
+    tolerateError?: TolerateError
     serverUrl?: string
     isFlaky?: boolean
   } = {},
@@ -43,6 +46,7 @@ function run(
     serverUrl,
     additionalTimeout,
     doNotFailOnWarning,
+    tolerateError,
     isFlaky,
   })
 

@@ -1,3 +1,19 @@
+## [0.6.15](https://github.com/brillout/test-e2e/compare/v0.6.14...v0.6.15) (2025-07-28)
+
+
+### Bug Fixes
+
+* add option `run(cmd, { tolerateError })` ([fc6a5b9](https://github.com/brillout/test-e2e/commit/fc6a5b944a1d477b2d1ec7fe249a2aa7c1f9daea))
+* add tolerateError type ([7f47b39](https://github.com/brillout/test-e2e/commit/7f47b39135b0598a340b1c9f90c8422f68202abf))
+* remove option `run(cmd, { doNotFailOnWarning: true })` ([16b921e](https://github.com/brillout/test-e2e/commit/16b921ed0d92191f2d2f0e956af4f0b52421eab8))
+
+
+### BREAKING CHANGES
+
+* use `run(cmd, { tolerateError: true })` instead
+
+
+
 ## [0.6.14](https://github.com/brillout/test-e2e/compare/v0.6.13...v0.6.14) (2025-06-09)
 
 

@@ -214,10 +214,9 @@ async function runTests(testInfo: TestInfo, isFinalAttempt: boolean): Promise<bo
     done(!!err)
     testInfo.afterEach(!!err)
     {
-      const failOnWarning = !testInfo.runInfo.doNotFailOnWarning
       const isFailureFromLogs = Logs.hasFailureLog({
-        includeBrowserWarnings: failOnWarning,
-        includeStderr: failOnWarning,
+        includeBrowserWarnings: true,
+        includeStderr: true,
       })
       const isFailure = err || isFailureFromLogs
       if (isFailure) {
@@ -239,7 +238,8 @@ async function runTests(testInfo: TestInfo, isFinalAttempt: boolean): Promise<bo
         ) {
           logFailure(err, `the test "${testDesc}" threw an error`, isFinalAttempt)
         } else {
-          assert(Logs.hasFailureLog({ includeBrowserWarnings: failOnWarning, includeStderr: true }))
+          assert(Logs.hasFailureLog({ includeBrowserWarnings: true, includeStderr: true }))
+          const failOnWarning = testInfo.runInfo.tolerateError !== true
           logFailure(
             null,
             `${getErrorType(failOnWarning)} occurred while running the test "${testDesc}"`,

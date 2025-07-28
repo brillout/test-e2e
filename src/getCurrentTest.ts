@@ -26,7 +26,6 @@ type TestInfo = {
     testFn: Function
   }[]
   testOptions?: {
-    doNotFailOnWarning: boolean
     tolerateError?: TolerateError
     testFunctionTimeout: number
     isFlaky: boolean
@@ -34,7 +33,6 @@ type TestInfo = {
   runInfo?: {
     cmd: string
     serverUrl: string
-    doNotFailOnWarning: boolean
     tolerateError?: TolerateError
     testFunctionTimeout: number
     isFlaky: boolean
@@ -95,7 +93,6 @@ function setRunInfo({
   cmd,
   serverUrl = serverUrlDefault,
   additionalTimeout = 0,
-  doNotFailOnWarning = false,
   tolerateError,
   isFlaky = false,
   isRunCommandThatTerminates = false,
@@ -103,7 +100,6 @@ function setRunInfo({
   cmd: string
   serverUrl?: string
   additionalTimeout?: number
-  doNotFailOnWarning?: boolean
   tolerateError?: TolerateError
   isFlaky?: boolean
   isRunCommandThatTerminates?: boolean
@@ -114,7 +110,6 @@ function setRunInfo({
     cmd,
     serverUrl,
     testFunctionTimeout,
-    doNotFailOnWarning,
     tolerateError,
     isFlaky,
     isRunCommandThatTerminates,

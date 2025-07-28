@@ -19,7 +19,6 @@ function run(
     serverIsReadyDelay = 1000,
     inspect = cliOptions.inspect,
     cwd,
-    doNotFailOnWarning,
     tolerateError,
     serverUrl,
     isFlaky,
@@ -31,7 +30,6 @@ function run(
     inspect?: boolean
     /** deprecated */
     cwd?: string
-    doNotFailOnWarning?: boolean
     tolerateError?: TolerateError
     serverUrl?: string
     isFlaky?: boolean
@@ -45,7 +43,6 @@ function run(
     cmd,
     serverUrl,
     additionalTimeout,
-    doNotFailOnWarning,
     tolerateError,
     isFlaky,
   })

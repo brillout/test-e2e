@@ -1,11 +1,16 @@
 export { isTolerateError }
+export type { TolerateError }
 
 import { getConfig } from '../getConfig.js'
-import { getCurrentTestOptional } from '../getCurrentTest.js'
+import { getCurrentTestOptional, type TestInfo } from '../getCurrentTest.js'
 import type { LogSource } from '../Logs.js'
 import stripAnsi from 'strip-ansi'
 
 type LogData = { logSource: LogSource; logText: string }
+
+type TolerateError =
+  | true
+  | ((args: { logSource: LogSource; logText: string; testInfo: null | TestInfo }) => boolean | undefined)
 
 function isTolerateError({ logSource, logText }: LogData): boolean {
   logText = stripAnsi(logText)

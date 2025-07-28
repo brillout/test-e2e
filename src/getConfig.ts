@@ -5,11 +5,12 @@ import path from 'path'
 import fs from 'fs'
 import { assert, assertUsage, fsWindowsBugWorkaround, isObject } from './utils.js'
 import type { LaunchOptions } from 'playwright-chromium'
+import type { TolerateError } from './Logs/isTolerateError.js'
 
 const configFileName = 'test-e2e.config.mjs'
 
 type Config = {
-  tolerateError?: Function | true
+  tolerateError?: TolerateError
   ci?: never
   chromiumLaunchOptions?: LaunchOptions
 }

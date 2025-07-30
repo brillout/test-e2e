@@ -1,3 +1,13 @@
+## [0.6.16](https://github.com/brillout/test-e2e/compare/v0.6.15...v0.6.16) (2025-07-30)
+
+
+### Bug Fixes
+
+* `export type { TolerateError }` ([d6b8364](https://github.com/brillout/test-e2e/commit/d6b8364dbf50bd207494514c630993735ccdcf6e))
+* use standard fetch() instead of node-fetch ([acebd7f](https://github.com/brillout/test-e2e/commit/acebd7f9439292fbc7bdaf3c95ed0364cc1ef4c5))
+
+
+
 ## [0.6.15](https://github.com/brillout/test-e2e/compare/v0.6.14...v0.6.15) (2025-07-28)
 
 

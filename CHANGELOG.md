@@ -1,3 +1,12 @@
+## [0.6.17](https://github.com/brillout/test-e2e/compare/v0.6.16...v0.6.17) (2025-08-05)
+
+
+### Bug Fixes
+
+* remove TEST_INSPECT ([91a7f98](https://github.com/brillout/test-e2e/commit/91a7f984666027dd70dd1afdb4e5de4e902e7aa7))
+
+
+
 ## [0.6.16](https://github.com/brillout/test-e2e/compare/v0.6.15...v0.6.16) (2025-07-30)
 
 

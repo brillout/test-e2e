@@ -13,8 +13,7 @@ validate()
 
 const cliOptions = {
   verbose,
-  // To inspect a specific test: `$ touch examples/some-example/INSPECT`
-  inspect: inspect || !!process.env.TEST_INSPECT,
+  inspect,
   debugEsbuild,
   bail,
 }

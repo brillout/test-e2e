@@ -17,9 +17,7 @@ async function fetchAndLogError(...args: Parameters<typeof fetch>): Promise<Resp
     const init = args[1]
     Logs.add({
       logSource: 'Connection Error',
-      logText: `Couldn't connect to \`${url}\`. Args: \`${JSON.stringify(init)}\`. Err: \`${
-        (err as Error).message
-      }\``,
+      logText: `Couldn't connect to \`${url}\`. Args: \`${JSON.stringify(init)}\`. Err: \`${(err as Error).message}\``,
     })
     throw new Error("Couldn't connect to server. See `Connection Error` log for more details.")
   }

@@ -1,3 +1,12 @@
+## [0.6.18](https://github.com/brillout/test-e2e/compare/v0.6.17...v0.6.18) (2025-08-06)
+
+
+### Features
+
+* new option `run({ verbose })` ([b35289f](https://github.com/brillout/test-e2e/commit/b35289f24f8dbe7ba43a04bbd14c504f839af232))
+
+
+
 ## [0.6.17](https://github.com/brillout/test-e2e/compare/v0.6.16...v0.6.17) (2025-08-05)
 
 

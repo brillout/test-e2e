@@ -18,6 +18,7 @@ function run(
     serverIsReadyMessage,
     serverIsReadyDelay = 1000,
     inspect = cliOptions.inspect,
+    verbose = cliOptions.verbose,
     cwd,
     tolerateError,
     serverUrl,
@@ -28,6 +29,7 @@ function run(
     serverIsReadyMessage?: string | ((log: string) => boolean)
     serverIsReadyDelay?: number
     inspect?: boolean
+    verbose?: boolean
     /** deprecated */
     cwd?: string
     tolerateError?: TolerateError
@@ -49,7 +51,7 @@ function run(
 
   if (inspect) {
     Logs.logEagerly = 'all'
-  } else if (cliOptions.verbose) {
+  } else if (verbose) {
     Logs.logEagerly = 'logs'
   }
 

@@ -1,3 +1,12 @@
+## [0.6.19](https://github.com/brillout/test-e2e/compare/v0.6.18...v0.6.19) (2025-09-11)
+
+
+### Bug Fixes
+
+* improve logging ([d2d6fcb](https://github.com/brillout/test-e2e/commit/d2d6fcbc872558c29f6024c36c89fa60d4662551))
+
+
+
 ## [0.6.18](https://github.com/brillout/test-e2e/compare/v0.6.17...v0.6.18) (2025-08-06)
 
 

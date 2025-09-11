@@ -50,30 +50,38 @@ function getErrorLogs({
   includeBrowserWarnings,
   includeStderr,
 }: { includeBrowserWarnings: boolean; includeStderr: boolean }) {
-  const errorLogs = logEntries.filter((logEntry) => {
-    if (logEntry.isNotFailure) {
-      return false
-    }
-    const { logSource } = logEntry
-    // taskkill makes process exit with exit code `1` which makes npm emit logs on stderr
-    if (logEntry.loggedAfterExit && isWindows() && logSource === 'stderr') {
-      return false
-    }
-    if (logSource === 'run() failure') {
-      return true
-    }
-    if (logSource === 'Browser Warning' && includeBrowserWarnings) {
-      return true
-    }
-    if (logSource === 'stderr' && includeStderr) {
-      return true
-    }
-    if (logSource === 'Browser Error') {
-      return true
-    }
-    return false
-  })
+  const errorLogs = logEntries.filter((logEntry) => isErrorLog(logEntry, { includeBrowserWarnings, includeStderr }))
   return errorLogs
+}
+
+function isErrorLog(
+  logEntry: LogEntry,
+  {
+    includeBrowserWarnings = true,
+    includeStderr = true,
+  }: { includeBrowserWarnings?: boolean; includeStderr?: boolean } = {},
+) {
+  if (logEntry.isNotFailure) {
+    return false
+  }
+  const { logSource } = logEntry
+  // taskkill makes process exit with exit code `1` which makes npm emit logs on stderr
+  if (logEntry.loggedAfterExit && isWindows() && logSource === 'stderr') {
+    return false
+  }
+  if (logSource === 'run() failure') {
+    return true
+  }
+  if (logSource === 'Browser Warning' && includeBrowserWarnings) {
+    return true
+  }
+  if (logSource === 'stderr' && includeStderr) {
+    return true
+  }
+  if (logSource === 'Browser Error') {
+    return true
+  }
+  return false
 }
 
 function clearLogs() {
@@ -198,10 +206,7 @@ function getTimestamp() {
 }
 
 function printLog(logEntry: LogEntry) {
-  const { logSource, logText, logTimestamp } = logEntry
-
-  let logSourceLabel: string = colorize(logSource)
-
+  const { logSource, logText, logTimestamp, logInfo } = logEntry
   const testInfo = getCurrentTestOptional()
 
   // See https://github.com/nodejs/node/issues/8033#issuecomment-388323687
@@ -209,18 +214,22 @@ function printLog(logEntry: LogEntry) {
     console.log('')
   }
 
+  // msg
   let msg = logText
   // I don't know why but sometimes `logText` is `undefined`
   if (msg === undefined) msg = ''
   // Some logs seem have a trailing new line
   msg = msg.trim()
+  if (logInfo && isErrorLog(logEntry)) msg += '\n' + logInfo.trim()
 
+  // testInfoLabels
   let testInfoLabels = ''
   if (testInfo) {
     assert(testInfo.runInfo, testInfo)
     testInfoLabels = `[${testInfo.testName}][${testInfo.runInfo.cmd}]`
   }
 
+  const logSourceLabel: string = colorize(logSource)
   console.log(`[${logTimestamp}]${testInfoLabels}[${logSourceLabel}] ${msg}`)
 }
 

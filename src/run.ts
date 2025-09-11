@@ -107,34 +107,35 @@ function run(
   // Also called when the page throws an error or a warning
   function onConsole(msg: ConsoleMessage) {
     const type = msg.type()
+    let showType = false
+    const logSource = (() => {
+      if (type === 'error') {
+        return 'Browser Error'
+      }
+      if (type === 'warning') {
+        return 'Browser Warning'
+      }
+      showType = true
+      return 'Browser Log'
+    })()
+    const logInfo = {
+      location: msg.location(),
+      args: msg.args(),
+    }
+    if (showType) Object.assign(logInfo, { type })
     Logs.add({
-      logSource: (() => {
-        if (type === 'error') {
-          return 'Browser Error'
-        }
-        if (type === 'warning') {
-          return 'Browser Warning'
-        }
-        return 'Browser Log'
-      })(),
+      logSource,
       logText: msg.text(),
-      logInfo: JSON.stringify(
-        {
-          type,
-          location: msg.location(),
-          args: msg.args(),
-        },
-        null,
-        2,
-      ),
+      logInfo: JSON.stringify(logInfo, null, 2),
     })
   }
   // For uncaught exceptions
   function onPageError(err: Error) {
+    const logText = err.stack || err.message
+    assert(logText.includes(err.message))
     Logs.add({
       logSource: 'Browser Error',
-      logText: err.stack || err.message,
-      logInfo: JSON.stringify({ errorMessage: err.message }, null, 2),
+      logText,
     })
   }
 }

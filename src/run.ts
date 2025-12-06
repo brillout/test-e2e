@@ -164,7 +164,7 @@ async function startProcess({
         // npm package `serve`
         log.includes('Accepting connections at') ||
         // Vite
-        (log.includes('Local:') && log.includes('http://localhost:3000/'))
+        (log.includes('Local:') && log.includes('http://localhost:3000'))
       return serverIsReady
     }
   }

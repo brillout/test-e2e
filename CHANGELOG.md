@@ -1,3 +1,12 @@
+## [0.6.20](https://github.com/brillout/test-e2e/compare/v0.6.19...v0.6.20) (2025-12-06)
+
+
+### Bug Fixes
+
+* improve server ready log detection ([0be7a3f](https://github.com/brillout/test-e2e/commit/0be7a3fb748749db63ee0c46c90456fe65e62641))
+
+
+
 ## [0.6.19](https://github.com/brillout/test-e2e/compare/v0.6.18...v0.6.19) (2025-09-11)
 
 

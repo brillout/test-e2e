@@ -1,3 +1,12 @@
+## [0.6.21](https://github.com/brillout/test-e2e/compare/v0.6.20...v0.6.21) (2025-12-11)
+
+
+### Features
+
+* accept regex for expectLog() ([38a15f0](https://github.com/brillout/test-e2e/commit/38a15f0c1a46c93c2be3e176dc66f60c5c5400df))
+
+
+
 ## [0.6.20](https://github.com/brillout/test-e2e/compare/v0.6.19...v0.6.20) (2025-12-06)
 
 

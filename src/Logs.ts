@@ -162,30 +162,36 @@ async function terminateUponErrorLog(logSource: 'Browser Error' | 'stderr') {
 /**
  * Expect a log to be printed.
  *
+ * @param pattern String or RegExp to search for in logs.
+ *
  * @param filter Only search in certain types of logs, e.g. only in browser- or server-side logs.
  *
  * @param allLogs Search in all logs, including the logs of previous tests as well as the logs of the setup/prepare scripts. Usually used in combination with the `filter` parameter.
  */
 function expectLog(
-  logText: string,
+  pattern: string | RegExp,
   { filter: logFilter, allLogs }: { filter?: (logEntry: LogEntry) => boolean; allLogs?: boolean } = {},
 ) {
   const logList = allLogs ? logEntriesAll : logEntries
+  const isRegex = pattern instanceof RegExp
+  const patternStr = isRegex ? pattern.toString() : `"${pattern}"`
   const logsFound = logList.filter((logEntry) => {
-    if (removeAnsi(logEntry).logText.includes(logText)) {
+    const logText = removeAnsi(logEntry).logText
+    const matches = isRegex ? pattern.test(logText) : logText.includes(pattern)
+    if (matches) {
       logEntry.isNotFailure = true
       return true
     }
     return false
   })
   if (logsFound.length === 0) {
-    throw new Error(`The following log is expected but it wasn't logged: "${logText}"`)
+    throw new Error(`The following log is expected but it wasn't logged: ${patternStr}`)
   }
   if (!logFilter) return
   const logsFoundAfterFilter = logsFound.filter((logEntry) => logFilter(removeAnsi(logEntry)))
   if (logsFoundAfterFilter.length === 0) {
     console.log(JSON.stringify(logsFound, null, 2))
-    throw new Error(`Logs above are matching "${logText}" but don't match the filter you provided.`)
+    throw new Error(`Logs above are matching ${patternStr} but don't match the filter you provided.`)
   }
 }
 

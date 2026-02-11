@@ -23,6 +23,7 @@ function run(
     tolerateError,
     serverUrl,
     isFlaky,
+    tolerateExitCode,
   }: {
     //baseUrl?: string
     additionalTimeout?: number
@@ -35,6 +36,7 @@ function run(
     tolerateError?: TolerateError
     serverUrl?: string
     isFlaky?: boolean
+    tolerateExitCode?: number[]
   } = {},
 ) {
   assert(cwd === undefined)
@@ -63,6 +65,7 @@ function run(
       additionalTimeout,
       serverIsReadyMessage,
       serverIsReadyDelay,
+      tolerateExitCode,
     })
 
     page.on('console', onConsole)
@@ -148,11 +151,13 @@ async function startProcess({
   serverIsReadyDelay,
   additionalTimeout,
   cmd,
+  tolerateExitCode,
 }: {
   serverIsReadyMessage?: string | ((log: string) => boolean)
   serverIsReadyDelay: number
   additionalTimeout: number
   cmd: string
+  tolerateExitCode?: number[]
 }): Promise<RunProcess> {
   const cwd = getCwd()
 
@@ -182,6 +187,7 @@ async function startProcess({
     isReadyLog: serverIsReadyMessage,
     isReadyTimeout: TIMEOUT_NPM_SCRIPT + additionalTimeout,
     killPort: process.env.CI || !isLinux() ? false : getServerPort(),
+    tolerateExitCode,
     onStderr(data: string, { loggedAfterExit }) {
       Logs.add({
         logSource: 'stderr',

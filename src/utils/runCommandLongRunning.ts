@@ -16,6 +16,7 @@ function runCommandLongRunning({
   onExit,
   onTerminationError,
   terminationTimeout,
+  tolerateExitCode,
 }: {
   cmd: string
   cwd: string
@@ -27,6 +28,7 @@ function runCommandLongRunning({
   onExit: (errMsg?: string) => void
   onTerminationError: (errMsg: string) => void
   terminationTimeout: number
+  tolerateExitCode?: number[]
 }): { terminate: (force?: true) => Promise<void>; isReadyPromise: Promise<void> } {
   if (killPort) killByPort(killPort)
 
@@ -109,7 +111,7 @@ function runCommandLongRunning({
     let errMsg: string | undefined
     {
       const exitIsExpected = isReady === true || isReadyPromiseTimedOut
-      if (!isSuccessCode(code)) {
+      if (!isSuccessCode(code, tolerateExitCode)) {
         errMsg = `Unexpected termination of command \`${cmd}\` with exit code ${code}`
       } else if (!exitIsExpected) {
         errMsg = `Unexpected premature termination of command \`${cmd}\` (with success exit code ${code})`
@@ -268,8 +270,14 @@ async function killByPort(port: number) {
   await runCommandShortLived(`fuser -k ${port}/tcp`, { swallowError: true, timeout: 10 * 1000 })
 }
 
-function isSuccessCode(code: number | null): boolean {
-  return code === 0 || code === null || (code === 1 && isWindows())
+function isSuccessCode(code: number | null, tolerateExitCode?: number[]): boolean {
+  if (code === 0 || code === null || (code === 1 && isWindows())) {
+    return true
+  }
+  if (tolerateExitCode?.includes(code)) {
+    return true
+  }
+  return false
 }
 
 // Workaround for Node.js regression:

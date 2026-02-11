@@ -1,3 +1,12 @@
+## [0.6.22](https://github.com/brillout/test-e2e/compare/v0.6.21...v0.6.22) (2026-02-11)
+
+
+### Features
+
+* tolerateExitCode ([b262053](https://github.com/brillout/test-e2e/commit/b262053f860685089d55a57a321afa5d3af9ce96))
+
+
+
 ## [0.6.21](https://github.com/brillout/test-e2e/compare/v0.6.20...v0.6.21) (2025-12-11)
 
 

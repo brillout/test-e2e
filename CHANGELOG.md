@@ -1,3 +1,12 @@
+## [0.6.23](https://github.com/brillout/test-e2e/compare/v0.6.22...v0.6.23) (2026-03-21)
+
+
+### Bug Fixes
+
+* tolerate 143 exit code on MacOS ([dd2abbd](https://github.com/brillout/test-e2e/commit/dd2abbdc9f4726ab468a544b70b85477528092fc))
+
+
+
 ## [0.6.22](https://github.com/brillout/test-e2e/compare/v0.6.21...v0.6.22) (2026-02-11)
 
 

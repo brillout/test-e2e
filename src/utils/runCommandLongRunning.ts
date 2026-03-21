@@ -2,7 +2,7 @@ export { runCommandLongRunning }
 
 import { spawn } from 'child_process'
 import stripAnsi from 'strip-ansi'
-import { assert, runCommandShortLived, humanizeTime, isWindows, isLinux, isCallable } from '../utils.js'
+import { assert, runCommandShortLived, humanizeTime, isWindows, isLinux, isCallable, isMac } from '../utils.js'
 import type { ChildProcessWithoutNullStreams } from 'child_process'
 
 function runCommandLongRunning({
@@ -271,7 +271,14 @@ async function killByPort(port: number) {
 }
 
 function isSuccessCode(code: number | null, tolerateExitCode?: number[]): boolean {
-  if (code === 0 || code === null || (code === 1 && isWindows())) {
+  if (
+    code === 0 ||
+    code === null ||
+    // Exit code can be `1` on Windows on nominal exit — I don't know why
+    (code === 1 && isWindows()) ||
+    // Exit code can be `143` on MacOS on nominal exit — I don't know why
+    (code === 143 && isMac())
+  ) {
     return true
   }
   if (tolerateExitCode?.includes(code)) {

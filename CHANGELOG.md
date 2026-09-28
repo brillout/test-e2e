@@ -1,3 +1,12 @@
+## [0.6.24](https://github.com/brillout/test-e2e/compare/v0.6.23...v0.6.24) (2026-09-28)
+
+
+### Bug Fixes
+
+* replace esbuild with Rolldown ([#2](https://github.com/brillout/test-e2e/issues/2)) ([e20ae33](https://github.com/brillout/test-e2e/commit/e20ae338e17c1d2527a5bcee66fb07d7b2e98cce))
+
+
+
 ## [0.6.23](https://github.com/brillout/test-e2e/compare/v0.6.22...v0.6.23) (2026-03-21)
 
 
@@ -234,6 +243,3 @@
   - expectLog('someText', (log) => someCondition(log))
   + expectLog('someText', { filter: (log) => someCondition(log) })
   ```
-
-
-

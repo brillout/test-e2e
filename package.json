@@ -26,11 +26,11 @@
     "@brillout/part-regex": "^0.1.4",
     "@brillout/picocolors": "^1.0.9",
     "chai": "^4.3.6",
-    "esbuild": "^0.23.0",
     "fast-glob": "^3.2.12",
     "pixelmatch": "^5.3.0",
     "playwright-chromium": "^1.22.2",
     "pngjs": "^6.0.0",
+    "rolldown": "^1.0.0",
     "source-map-support": "^0.5.21",
     "strip-ansi": "^6.0.1"
   },

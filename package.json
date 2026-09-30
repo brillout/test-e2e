@@ -43,7 +43,7 @@
     "@types/pngjs": "^6.0.1",
     "@types/source-map-support": "^0.5.6",
     "prettier": "^3.2.5",
-    "typescript": "^5.4.5"
+    "typescript": "^7.0.2"
   },
   "repository": "github:brillout/test-e2e",
   "files": [

@@ -1,3 +1,12 @@
+## [0.6.25](https://github.com/brillout/test-e2e/compare/v0.6.24...v0.6.25) (2026-10-14)
+
+
+### Bug Fixes
+
+* bind page methods so that page.unroute() works ([#3](https://github.com/brillout/test-e2e/issues/3)) ([9d3d7ac](https://github.com/brillout/test-e2e/commit/9d3d7acadf5c7021ce12f6adce4b27354e9132e4))
+
+
+
 ## [0.6.24](https://github.com/brillout/test-e2e/compare/v0.6.23...v0.6.24) (2026-09-28)
 
 

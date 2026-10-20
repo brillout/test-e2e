@@ -103,8 +103,10 @@ function runCommandLongRunning({
       onError(new Error('Port conflict? Port already in use EADDRINUSE.'))
     }
   })
-  let exitPromiseResolve!: () => void
-  const exitPromise = new Promise<void>((r) => (exitPromiseResolve = r))
+  // Unlike 'exit', 'close' waits until stdout and stderr are closed: processes spawned by `cmd` (e.g. the server spawned by `pnpm run dev`) may still log after `cmd` exited
+  let closePromiseResolve!: () => void
+  const closePromise = new Promise<void>((r) => (closePromiseResolve = r))
+  proc.on('close', () => closePromiseResolve())
   proc.on('exit', (code) => {
     procExited = true
 
@@ -124,8 +126,6 @@ function runCommandLongRunning({
     if (errMsg) {
       onError(new Error(errMsg), true)
     }
-
-    exitPromiseResolve()
   })
 
   return {
@@ -165,8 +165,9 @@ function runCommandLongRunning({
       force,
       onTerminationError,
     })
+    // Wait for the last logs, so that they're attributed to the current test instead of the next one. (`promise` is resolved upon termination timeout.)
+    await Promise.race([closePromise, promise])
     clearTimeout(terminateTimeout)
-    await exitPromise
     resolve()
     return promise
   }

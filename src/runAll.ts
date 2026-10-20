@@ -165,8 +165,8 @@ async function runServerAndTests(browser: Browser, isThirdAttempt: boolean, isFl
 }
 
 async function closeTest(testInfo: TestInfo, success: boolean, isFinalAttempt: boolean) {
-  await testInfo.terminateServer!()
-  await testInfo.page!.close()
+  // Close the page while the server terminates: a server with a graceful shutdown (`server.close()`) exits only once the page's open connections (e.g. SSE) are closed
+  await Promise.all([testInfo.terminateServer!(), testInfo.page!.close()])
 
   // Check whether stderr emitted during testInfo.terminateServer()
   if (success) {

@@ -103,7 +103,7 @@ function runCommandLongRunning({
       onError(new Error('Port conflict? Port already in use EADDRINUSE.'))
     }
   })
-  // Unlike 'exit', 'close' waits until stdout and stderr are closed: processes spawned by `cmd` (e.g. the server spawned by `pnpm run dev`) may still log after `cmd` exited
+  // We listen to the 'close' event, because unlike 'exit' the 'close' event waits until stdout and stderr are closed: processes spawned by `cmd` (e.g. the server spawned by `pnpm run dev`) may still log after `cmd` exited
   const closePromise = new Promise<void>((r) => proc.on('close', () => r()))
   proc.on('exit', (code) => {
     procExited = true

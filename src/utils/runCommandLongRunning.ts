@@ -104,9 +104,7 @@ function runCommandLongRunning({
     }
   })
   // Unlike 'exit', 'close' waits until stdout and stderr are closed: processes spawned by `cmd` (e.g. the server spawned by `pnpm run dev`) may still log after `cmd` exited
-  let closePromiseResolve!: () => void
-  const closePromise = new Promise<void>((r) => (closePromiseResolve = r))
-  proc.on('close', () => closePromiseResolve())
+  const closePromise = new Promise<void>((r) => proc.on('close', () => r()))
   proc.on('exit', (code) => {
     procExited = true
 

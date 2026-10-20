@@ -1,3 +1,12 @@
+## [0.6.26](https://github.com/brillout/test-e2e/compare/v0.6.25...v0.6.26) (2026-10-20)
+
+
+### Bug Fixes
+
+* attribute a terminating server's logs to its own test ([#4](https://github.com/brillout/test-e2e/issues/4)) ([9427b8e](https://github.com/brillout/test-e2e/commit/9427b8ed39fde674c8d290bdca85273b57d98d3a))
+
+
+
 ## [0.6.25](https://github.com/brillout/test-e2e/compare/v0.6.24...v0.6.25) (2026-10-14)
 
 

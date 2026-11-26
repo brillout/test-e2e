@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.5.3",
-    "@brillout/release-me": "^0.4.19",
+    "@brillout/release-me": "^0.5.2",
     "@types/chai": "^4.3.3",
     "@types/node": "^15.6.1",
     "@types/pixelmatch": "^5.2.4",
@@ -51,5 +51,6 @@
   ],
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "packageManager": "pnpm@10.34.9"
 }
